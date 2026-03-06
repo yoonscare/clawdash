@@ -1,0 +1,12 @@
+{
+  "btc": {
+    "price": 65432,
+    "change24h": 2.34,
+    "portfolio": 0.15
+  },
+  "eth": {
+    "price": 3456,
+    "change24h": -1.2,
+    "portfolio": 2.5
+  }
+}

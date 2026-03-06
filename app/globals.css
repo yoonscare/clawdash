@@ -1,0 +1,59 @@
+@import "tailwindcss";
+
+@theme {
+  --color-neo-bg: #FFFEF2;
+  --color-neo-bg-dark: #0A0A0A;
+  --color-neo-yellow: #FFE66D;
+  --color-neo-pink: #FF6B9D;
+  --color-neo-cyan: #4ECDC4;
+  --color-neo-red: #FF4757;
+  --color-neo-purple: #A855F7;
+  --color-neo-blue: #3B82F6;
+  --color-neo-black: #000000;
+  --color-neo-white: #FFFFFF;
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-sans: 'Inter', sans-serif;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-neo-bg);
+  color: var(--color-neo-black);
+}
+
+.dark body,
+body.dark {
+  background-color: var(--color-neo-bg-dark);
+  color: var(--color-neo-white);
+}
+
+h1, h2, h3, h4, h5, h6,
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+.neo-shadow {
+  box-shadow: 8px 8px 0 #000;
+}
+
+.neo-shadow-sm {
+  box-shadow: 4px 4px 0 #000;
+}
+
+.neo-shadow-hover {
+  box-shadow: 12px 12px 0 #000;
+  transform: translate(-2px, -2px);
+}
+
+.dark .neo-shadow {
+  box-shadow: 8px 8px 0 #FFE66D;
+}
+
+.dark .neo-shadow-sm {
+  box-shadow: 4px 4px 0 #FFE66D;
+}
+
+.dark .neo-shadow-hover {
+  box-shadow: 12px 12px 0 #FFE66D;
+  transform: translate(-2px, -2px);
+}
