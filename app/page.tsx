@@ -2,14 +2,18 @@ import Header from '@/components/layout/Header';
 import DashboardGrid from '@/components/layout/DashboardGrid';
 import ClockWidget from '@/components/widgets/ClockWidget';
 import WeatherCard from '@/components/widgets/WeatherCard';
-import CryptoTracker from '@/components/widgets/CryptoTracker';
-import GlucoseMonitor from '@/components/widgets/GlucoseMonitor';
-import AppleHealthSync from '@/components/widgets/AppleHealthSync';
-import NewsFeed from '@/components/widgets/NewsFeed';
 import AgentStatus from '@/components/widgets/AgentStatus';
-import CronMonitor from '@/components/widgets/CronMonitor';
 import QuickNote from '@/components/widgets/QuickNote';
 import CalendarWidget from '@/components/widgets/CalendarWidget';
+import CronMonitor from '@/components/widgets/CronMonitor';
+import ChatLog from '@/components/widgets/ChatLog';
+import MissionTracker from '@/components/widgets/MissionTracker';
+import TodoList from '@/components/widgets/TodoList';
+import AIDigest from '@/components/widgets/AIDigest';
+import HealthTracker from '@/components/widgets/HealthTracker';
+import TaskTracker from '@/components/widgets/TaskTracker';
+import DocsViewer from '@/components/widgets/DocsViewer';
+import AgentChat from '@/components/widgets/AgentChat';
 
 export default function Home() {
   return (
@@ -19,13 +23,17 @@ export default function Home() {
         <ClockWidget />
         <WeatherCard />
         <AgentStatus />
-        <QuickNote />
-        <AppleHealthSync />
-        <CronMonitor />
+        <TodoList />
+        <TaskTracker />
+        <HealthTracker />
         <CalendarWidget />
-        <CryptoTracker />
-        <GlucoseMonitor />
-        <NewsFeed />
+        <ChatLog />
+        <AgentChat />
+        <MissionTracker />
+        <DocsViewer />
+        <QuickNote />
+        <CronMonitor />
+        <AIDigest />
       </DashboardGrid>
     </main>
   );

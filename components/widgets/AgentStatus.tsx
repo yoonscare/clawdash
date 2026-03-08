@@ -16,16 +16,16 @@ export default function AgentStatus() {
 
   useEffect(() => {
     setAgent({
-      name: 'OpenClaw Agent',
+      name: '클로 🐾',
       status: 'online',
-      uptime: '12d 4h 32m',
-      lastPing: '3s ago',
+      uptime: '항상 대기중',
+      lastPing: '방금 전',
     });
   }, []);
 
   return (
     <NeoCard accent="bg-neo-cyan">
-      <h3 className="font-mono text-xs font-bold uppercase mb-2 opacity-60">Agent Status</h3>
+      <h3 className="font-mono text-xs font-bold uppercase mb-2 opacity-60">🤖 에이전트</h3>
       {agent && (
         <>
           <div className="flex items-center gap-2 mb-3">
@@ -35,11 +35,11 @@ export default function AgentStatus() {
             <span className="font-mono font-bold">{agent.name}</span>
           </div>
           <NeoBadge variant={agent.status === 'online' ? 'success' : 'error'}>
-            {agent.status}
+            {agent.status === 'online' ? '온라인' : '오프라인'}
           </NeoBadge>
           <div className="mt-3 space-y-1">
-            <div className="text-xs"><span className="font-bold">Uptime:</span> {agent.uptime}</div>
-            <div className="text-xs"><span className="font-bold">Last ping:</span> {agent.lastPing}</div>
+            <div className="text-xs"><span className="font-bold">상태:</span> {agent.uptime}</div>
+            <div className="text-xs"><span className="font-bold">마지막 응답:</span> {agent.lastPing}</div>
           </div>
         </>
       )}

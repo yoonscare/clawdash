@@ -1,0 +1,6 @@
+[
+  { "title": "간호교육인증평가 자동화", "status": "in-progress", "progress": 30, "emoji": "📋" },
+  { "title": "AI 활용 강의 확대", "status": "in-progress", "progress": 60, "emoji": "🎓" },
+  { "title": "교육용 앱 개발 (성적 관리)", "status": "in-progress", "progress": 45, "emoji": "📊" },
+  { "title": "HWPX-CLI 활용", "status": "done", "progress": 100, "emoji": "📝" }
+]
