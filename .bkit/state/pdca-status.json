@@ -1,0 +1,87 @@
+{
+  "version": "2.0",
+  "lastUpdated": "2026-03-09T01:58:13.255Z",
+  "activeFeatures": [
+    "cron",
+    "digest",
+    "widgets"
+  ],
+  "primaryFeature": "cron",
+  "features": {
+    "cron": {
+      "phase": "do",
+      "phaseNumber": 3,
+      "matchRate": null,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {},
+      "timestamps": {
+        "started": "2026-03-09T01:57:43.662Z",
+        "lastUpdated": "2026-03-09T01:57:43.662Z"
+      },
+      "lastFile": "C:/Users/김기훈.LAPTOP-1R73PMSJ/Projects/clawdash/app/api/cron/route.ts"
+    },
+    "digest": {
+      "phase": "do",
+      "phaseNumber": 3,
+      "matchRate": null,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {},
+      "timestamps": {
+        "started": "2026-03-09T01:57:53.837Z",
+        "lastUpdated": "2026-03-09T01:57:53.837Z"
+      },
+      "lastFile": "C:/Users/김기훈.LAPTOP-1R73PMSJ/Projects/clawdash/app/api/digest/route.ts"
+    },
+    "widgets": {
+      "phase": "do",
+      "phaseNumber": 3,
+      "matchRate": null,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {},
+      "timestamps": {
+        "started": "2026-03-09T01:58:06.128Z",
+        "lastUpdated": "2026-03-09T01:58:13.254Z"
+      },
+      "lastFile": "C:/Users/김기훈.LAPTOP-1R73PMSJ/Projects/clawdash/components/widgets/AIDigest.tsx"
+    }
+  },
+  "pipeline": {
+    "currentPhase": 1,
+    "level": "Dynamic",
+    "phaseHistory": []
+  },
+  "session": {
+    "startedAt": "2026-03-09T01:55:06.166Z",
+    "onboardingCompleted": false,
+    "lastActivity": "2026-03-09T01:58:13.255Z"
+  },
+  "history": [
+    {
+      "timestamp": "2026-03-09T01:57:43.662Z",
+      "feature": "cron",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-09T01:57:53.837Z",
+      "feature": "digest",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-09T01:58:06.128Z",
+      "feature": "widgets",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-09T01:58:13.255Z",
+      "feature": "widgets",
+      "phase": "do",
+      "action": "updated"
+    }
+  ]
+}

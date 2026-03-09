@@ -12,12 +12,12 @@ interface AgentMsg {
 
 const agentEmoji: Record<string, string> = {
   '클로': '🦦',
-  '클로아우': '🦦',
+  '클로아우': '🐾',
 };
 
 const agentColor: Record<string, string> = {
   '클로': 'bg-neo-cyan/20 border-neo-cyan',
-  '클로아우': 'bg-neo-green/20 border-neo-green',
+  '클로아우': 'bg-neo-purple/20 border-neo-purple',
 };
 
 export default function AgentChat() {
@@ -45,7 +45,7 @@ export default function AgentChat() {
   return (
     <NeoCard accent="bg-neo-green" span="md">
       <h3 className="font-mono text-xs font-bold uppercase mb-3 opacity-60">
-        🦦↔🦦 에이전트 대화 (sessions_send)
+        🦦↔🐾 에이전트 대화
       </h3>
       {loading ? (
         <div className="h-20 flex items-center justify-center font-mono text-sm animate-pulse">로딩 중...</div>
