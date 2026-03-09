@@ -11,8 +11,8 @@
   --color-neo-blue: #3B82F6;
   --color-neo-black: #000000;
   --color-neo-white: #FFFFFF;
-  --font-mono: 'JetBrains Mono', monospace;
-  --font-sans: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Noto Sans KR', monospace;
+  --font-sans: 'Inter', 'Noto Sans KR', sans-serif;
 }
 
 body {
