@@ -47,10 +47,28 @@ export async function POST(request: Request) {
 
     await put(BLOB_KEY, JSON.stringify(messages), {
       access: 'public',
-      contentType: 'application/json',
+      contentType: 'application/json; charset=utf-8',
     });
 
     return NextResponse.json({ ok: true, count: messages.length });
+  } catch (e) {
+    return NextResponse.json({ error: String(e) }, { status: 500 });
+  }
+}
+
+export async function DELETE(request: Request) {
+  try {
+    const authHeader = request.headers.get('x-api-key');
+    if (authHeader !== process.env.CHATLOG_API_KEY && process.env.CHATLOG_API_KEY) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    const { blobs } = await list({ prefix: BLOB_KEY });
+    for (const blob of blobs) {
+      await del(blob.url);
+    }
+
+    return NextResponse.json({ ok: true, deleted: blobs.length });
   } catch (e) {
     return NextResponse.json({ error: String(e) }, { status: 500 });
   }
