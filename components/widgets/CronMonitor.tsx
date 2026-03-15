@@ -8,7 +8,9 @@ interface CronJob {
   name: string;
   schedule: string;
   lastRun: string;
+  nextRun: string;
   status: 'success' | 'failed' | 'running';
+  enabled: boolean;
 }
 
 export default function CronMonitor() {
@@ -23,29 +25,39 @@ export default function CronMonitor() {
         else setError(true);
       })
       .catch(() => setError(true));
+
+    const interval = setInterval(() => {
+      fetch('/api/cron').then(r => r.json()).then(data => {
+        if (Array.isArray(data)) setJobs(data);
+      }).catch(() => {});
+    }, 60000);
+    return () => clearInterval(interval);
   }, []);
 
   const statusVariant = (s: CronJob['status']) =>
     s === 'success' ? 'success' as const : s === 'failed' ? 'error' as const : 'warning' as const;
 
   return (
-    <NeoCard accent="bg-neo-yellow" span="md">
-      <h3 className="font-mono text-xs font-bold uppercase mb-3 opacity-60">Cron Monitor</h3>
+    <NeoCard accent="bg-neo-yellow">
+      <h3 className="font-mono text-xs font-bold uppercase mb-3 opacity-60">⏰ Cron Monitor</h3>
       {error ? (
-        <div className="text-xs opacity-50 font-mono">Failed to load cron jobs</div>
+        <div className="text-xs opacity-50 font-mono">크론 정보를 가져올 수 없어요</div>
       ) : jobs.length === 0 ? (
-        <div className="text-xs opacity-50 font-mono">Loading...</div>
+        <div className="text-xs opacity-50 font-mono">등록된 크론 잡이 없어요</div>
       ) : (
         <div className="space-y-2">
           {jobs.map(job => (
-            <div key={job.name} className="flex items-center justify-between border-4 border-black dark:border-neo-yellow p-2 px-3">
-              <div>
-                <div className="font-mono text-sm font-bold">{job.name}</div>
-                <div className="text-xs opacity-50 font-mono">{job.schedule}</div>
+            <div key={job.name} className={`border-3 border-black dark:border-neo-yellow p-2 ${!job.enabled ? 'opacity-40' : ''}`}>
+              <div className="flex items-center justify-between mb-1">
+                <span className="font-mono text-xs font-bold truncate">{job.name}</span>
+                <NeoBadge variant={statusVariant(job.status)}>
+                  {job.status === 'success' ? '✅' : job.status === 'failed' ? '❌' : '⏳'}
+                </NeoBadge>
               </div>
-              <div className="text-right flex items-center gap-2">
-                <span className="text-xs opacity-50">{job.lastRun}</span>
-                <NeoBadge variant={statusVariant(job.status)}>{job.status}</NeoBadge>
+              <div className="font-mono text-[10px] opacity-50 space-y-0.5">
+                <div>📋 {job.schedule}</div>
+                <div>⏮ {job.lastRun}</div>
+                {job.nextRun && <div>⏭ {job.nextRun}</div>}
               </div>
             </div>
           ))}

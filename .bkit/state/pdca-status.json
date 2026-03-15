@@ -1,10 +1,15 @@
 {
   "version": "2.0",
-  "lastUpdated": "2026-03-09T01:58:13.255Z",
+  "lastUpdated": "2026-03-15T02:59:29.961Z",
   "activeFeatures": [
     "cron",
     "digest",
-    "widgets"
+    "widgets",
+    "clawdash",
+    "tasks",
+    "agent-chat",
+    "chatlog",
+    "docs"
   ],
   "primaryFeature": "cron",
   "features": {
@@ -46,6 +51,71 @@
         "lastUpdated": "2026-03-09T01:58:13.254Z"
       },
       "lastFile": "C:/Users/김기훈.LAPTOP-1R73PMSJ/Projects/clawdash/components/widgets/AIDigest.tsx"
+    },
+    "clawdash": {
+      "phase": "do",
+      "phaseNumber": 3,
+      "matchRate": null,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {},
+      "timestamps": {
+        "started": "2026-03-15T02:58:59.111Z",
+        "lastUpdated": "2026-03-15T02:58:59.111Z"
+      },
+      "lastFile": "C:\\Users\\김기훈.LAPTOP-1R73PMSJ\\Projects\\clawdash\\lib\\supabase.ts"
+    },
+    "tasks": {
+      "phase": "do",
+      "phaseNumber": 3,
+      "matchRate": null,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {},
+      "timestamps": {
+        "started": "2026-03-15T02:59:12.749Z",
+        "lastUpdated": "2026-03-15T02:59:12.749Z"
+      },
+      "lastFile": "C:\\Users\\김기훈.LAPTOP-1R73PMSJ\\Projects\\clawdash\\app\\api\\tasks\\route.ts"
+    },
+    "agent-chat": {
+      "phase": "do",
+      "phaseNumber": 3,
+      "matchRate": null,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {},
+      "timestamps": {
+        "started": "2026-03-15T02:59:22.275Z",
+        "lastUpdated": "2026-03-15T02:59:22.275Z"
+      },
+      "lastFile": "C:\\Users\\김기훈.LAPTOP-1R73PMSJ\\Projects\\clawdash\\app\\api\\agent-chat\\route.ts"
+    },
+    "chatlog": {
+      "phase": "do",
+      "phaseNumber": 3,
+      "matchRate": null,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {},
+      "timestamps": {
+        "started": "2026-03-15T02:59:25.668Z",
+        "lastUpdated": "2026-03-15T02:59:25.668Z"
+      },
+      "lastFile": "C:\\Users\\김기훈.LAPTOP-1R73PMSJ\\Projects\\clawdash\\app\\api\\chatlog\\route.ts"
+    },
+    "docs": {
+      "phase": "do",
+      "phaseNumber": 3,
+      "matchRate": null,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {},
+      "timestamps": {
+        "started": "2026-03-15T02:59:29.960Z",
+        "lastUpdated": "2026-03-15T02:59:29.960Z"
+      },
+      "lastFile": "C:\\Users\\김기훈.LAPTOP-1R73PMSJ\\Projects\\clawdash\\app\\api\\docs\\route.ts"
     }
   },
   "pipeline": {
@@ -56,7 +126,7 @@
   "session": {
     "startedAt": "2026-03-09T01:55:06.166Z",
     "onboardingCompleted": false,
-    "lastActivity": "2026-03-09T01:58:13.255Z"
+    "lastActivity": "2026-03-15T02:59:29.961Z"
   },
   "history": [
     {
@@ -80,6 +150,36 @@
     {
       "timestamp": "2026-03-09T01:58:13.255Z",
       "feature": "widgets",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-15T02:58:59.111Z",
+      "feature": "clawdash",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-15T02:59:12.749Z",
+      "feature": "tasks",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-15T02:59:22.275Z",
+      "feature": "agent-chat",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-15T02:59:25.668Z",
+      "feature": "chatlog",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-15T02:59:29.960Z",
+      "feature": "docs",
       "phase": "do",
       "action": "updated"
     }

@@ -1,15 +1,24 @@
-import { put, list, del } from '@vercel/blob';
+import { supabase } from '@/lib/supabase';
 import { NextResponse } from 'next/server';
-
-const BLOB_KEY = 'docs.json';
 
 export async function GET() {
   try {
-    const { blobs } = await list({ prefix: BLOB_KEY });
-    if (blobs.length === 0) return NextResponse.json([]);
-    const res = await fetch(blobs[0].url);
-    const data = await res.json();
-    return NextResponse.json(data);
+    const { data, error } = await supabase
+      .from('docs')
+      .select('*')
+      .order('id', { ascending: false })
+      .limit(30);
+
+    if (error) throw error;
+
+    const docs = (data || []).reverse().map((row) => ({
+      title: row.title,
+      path: row.path,
+      date: row.date,
+      emoji: row.emoji,
+    }));
+
+    return NextResponse.json(docs);
   } catch {
     return NextResponse.json([]);
   }
@@ -25,24 +34,18 @@ export async function POST(request: Request) {
     const body = await request.json();
     const { title, path, emoji } = body;
 
-    let docs: Array<{ title: string; path: string; date: string; emoji: string }> = [];
-    const { blobs } = await list({ prefix: BLOB_KEY });
-    if (blobs.length > 0) {
-      const res = await fetch(blobs[0].url);
-      docs = await res.json();
-      await del(blobs[0].url);
-    }
-
     const now = new Date();
-    docs.push({
-      title, path: path || '',
+    const { error } = await supabase.from('docs').insert({
+      title,
+      path: path || '',
       date: now.toLocaleDateString('ko-KR', { timeZone: 'Asia/Seoul' }),
-      emoji: emoji || '📄'
+      emoji: emoji || '📄',
     });
-    if (docs.length > 30) docs = docs.slice(-30);
 
-    await put(BLOB_KEY, JSON.stringify(docs), { access: 'public', contentType: 'application/json' });
-    return NextResponse.json({ ok: true, count: docs.length });
+    if (error) throw error;
+
+    const { count } = await supabase.from('docs').select('*', { count: 'exact', head: true });
+    return NextResponse.json({ ok: true, count: count || 0 });
   } catch (e) {
     return NextResponse.json({ error: String(e) }, { status: 500 });
   }

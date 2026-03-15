@@ -1,15 +1,26 @@
-import { put, list, del } from '@vercel/blob';
+import { supabase } from '@/lib/supabase';
 import { NextResponse } from 'next/server';
-
-const BLOB_KEY = 'tasks.json';
 
 export async function GET() {
   try {
-    const { blobs } = await list({ prefix: BLOB_KEY });
-    if (blobs.length === 0) return NextResponse.json([]);
-    const res = await fetch(blobs[0].url);
-    const data = await res.json();
-    return NextResponse.json(data);
+    const { data, error } = await supabase
+      .from('tasks')
+      .select('*')
+      .order('id', { ascending: false })
+      .limit(30);
+
+    if (error) throw error;
+
+    // Return in chronological order (oldest first) to match previous behavior
+    const tasks = (data || []).reverse().map((row) => ({
+      date: row.date,
+      time: row.time,
+      task: row.task,
+      status: row.status,
+      emoji: row.emoji,
+    }));
+
+    return NextResponse.json(tasks);
   } catch {
     return NextResponse.json([]);
   }
@@ -25,24 +36,19 @@ export async function POST(request: Request) {
     const body = await request.json();
     const { task, status, emoji } = body;
 
-    let tasks: Array<{ time: string; date: string; task: string; status: string; emoji: string }> = [];
-    const { blobs } = await list({ prefix: BLOB_KEY });
-    if (blobs.length > 0) {
-      const res = await fetch(blobs[0].url);
-      tasks = await res.json();
-      await del(blobs[0].url);
-    }
-
     const now = new Date();
-    tasks.push({
+    const { error } = await supabase.from('tasks').insert({
       date: now.toLocaleDateString('ko-KR', { timeZone: 'Asia/Seoul' }),
       time: now.toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'Asia/Seoul' }),
-      task, status: status || 'done', emoji: emoji || '✅'
+      task,
+      status: status || 'done',
+      emoji: emoji || '✅',
     });
-    if (tasks.length > 30) tasks = tasks.slice(-30);
 
-    await put(BLOB_KEY, JSON.stringify(tasks), { access: 'public', contentType: 'application/json' });
-    return NextResponse.json({ ok: true, count: tasks.length });
+    if (error) throw error;
+
+    const { count } = await supabase.from('tasks').select('*', { count: 'exact', head: true });
+    return NextResponse.json({ ok: true, count: count || 0 });
   } catch (e) {
     return NextResponse.json({ error: String(e) }, { status: 500 });
   }

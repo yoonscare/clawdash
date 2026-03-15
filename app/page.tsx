@@ -12,7 +12,6 @@ import TodoList from '@/components/widgets/TodoList';
 import AIDigest from '@/components/widgets/AIDigest';
 import HealthTracker from '@/components/widgets/HealthTracker';
 import TaskTracker from '@/components/widgets/TaskTracker';
-import DocsViewer from '@/components/widgets/DocsViewer';
 import AgentChat from '@/components/widgets/AgentChat';
 
 export default function Home() {
@@ -24,16 +23,15 @@ export default function Home() {
         <WeatherCard />
         <AgentStatus />
         <TodoList />
+        <AgentChat />
         <TaskTracker />
-        <HealthTracker />
         <CalendarWidget />
         <ChatLog />
-        <AgentChat />
         <MissionTracker />
-        <DocsViewer />
         <QuickNote />
         <CronMonitor />
         <AIDigest />
+        <HealthTracker />
       </DashboardGrid>
     </main>
   );

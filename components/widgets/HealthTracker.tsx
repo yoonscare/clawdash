@@ -94,13 +94,47 @@ export default function HealthTracker() {
   const latest = bpRecords[0];
 
   return (
-    <NeoCard accent="bg-neo-red" span="lg">
+    <NeoCard accent="bg-neo-red" span="sm">
       <h3 className="font-mono text-xs font-bold uppercase mb-3 opacity-60">❤️ 건강 관리</h3>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+      <div className="space-y-4">
+        {/* 주간 루틴 섹션 */}
+        <div>
+          <div className="font-mono text-xs font-bold mb-2">📅 주간 건강 루틴</div>
+          <div className="space-y-2">
+            {routines.map((r, ri) => {
+              const doneCount = r.done.filter(Boolean).length;
+              const achieved = doneCount >= r.targetPerWeek;
+              return (
+                <div key={ri} className="border-3 border-black dark:border-neo-yellow p-2">
+                  <div className="flex items-center justify-between mb-1">
+                    <span className="text-xs font-bold">{r.emoji} {r.label}</span>
+                    <span className={`font-mono text-xs font-bold ${achieved ? 'text-green-500' : 'opacity-50'}`}>
+                      {doneCount}/{r.targetPerWeek}
+                    </span>
+                  </div>
+                  <div className="flex gap-1">
+                    {DAY_LABELS.map((day, di) => (
+                      <button
+                        key={di}
+                        onClick={() => toggleRoutine(ri, di)}
+                        className={`flex-1 py-0.5 border-2 border-black dark:border-neo-yellow text-[10px] font-mono font-bold transition-colors ${
+                          r.done[di] ? 'bg-neo-cyan text-black' : 'opacity-40 hover:opacity-70'
+                        }`}
+                      >
+                        {day}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
         {/* 혈압 섹션 */}
         <div>
-          <div className="font-mono text-xs font-bold mb-2">💉 혈압 기록</div>
+          <div className="font-mono text-xs font-bold mb-2">💉 혈압</div>
           
           {latest ? (
             <div className="border-4 border-black dark:border-neo-yellow p-3 mb-2">
@@ -157,39 +191,6 @@ export default function HealthTracker() {
           )}
         </div>
 
-        {/* 주간 루틴 섹션 */}
-        <div>
-          <div className="font-mono text-xs font-bold mb-2">📅 주간 건강 루틴</div>
-          <div className="space-y-3">
-            {routines.map((r, ri) => {
-              const doneCount = r.done.filter(Boolean).length;
-              const achieved = doneCount >= r.targetPerWeek;
-              return (
-                <div key={ri} className="border-4 border-black dark:border-neo-yellow p-2">
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-sm font-bold">{r.emoji} {r.label}</span>
-                    <span className={`font-mono text-xs font-bold ${achieved ? 'text-green-500' : 'opacity-50'}`}>
-                      {doneCount}/{r.targetPerWeek}
-                    </span>
-                  </div>
-                  <div className="flex gap-1">
-                    {DAY_LABELS.map((day, di) => (
-                      <button
-                        key={di}
-                        onClick={() => toggleRoutine(ri, di)}
-                        className={`flex-1 py-1 border-2 border-black dark:border-neo-yellow text-xs font-mono font-bold transition-colors ${
-                          r.done[di] ? 'bg-neo-cyan text-black' : 'opacity-40 hover:opacity-70'
-                        }`}
-                      >
-                        {day}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
       </div>
     </NeoCard>
   );
