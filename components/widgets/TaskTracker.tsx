@@ -1,7 +1,7 @@
 'use client';
 
-import { useState, useEffect } from 'react';
 import NeoCard from '@/components/ui/NeoCard';
+import { useSupabaseRealtime } from '@/hooks/useSupabaseRealtime';
 
 interface TaskItem {
   date: string;
@@ -11,27 +11,13 @@ interface TaskItem {
   emoji: string;
 }
 
+const REALTIME_OPTIONS = {
+  table: 'tasks',
+  fetchUrl: '/api/tasks',
+} as const;
+
 export default function TaskTracker() {
-  const [tasks, setTasks] = useState<TaskItem[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  const fetchTasks = async () => {
-    try {
-      const res = await fetch('/api/tasks');
-      const data = await res.json();
-      setTasks(data);
-    } catch {
-      setTasks([]);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchTasks();
-    const interval = setInterval(fetchTasks, 60000);
-    return () => clearInterval(interval);
-  }, []);
+  const { data: tasks, loading } = useSupabaseRealtime<TaskItem>(REALTIME_OPTIONS);
 
   const todayTasks = tasks.filter(t => {
     const today = new Date().toLocaleDateString('ko-KR', { timeZone: 'Asia/Seoul' });

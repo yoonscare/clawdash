@@ -1,7 +1,8 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useMemo } from 'react';
 import NeoCard from '@/components/ui/NeoCard';
+import { useSupabaseRealtime } from '@/hooks/useSupabaseRealtime';
 
 interface AgentMsg {
   time: string;
@@ -20,27 +21,13 @@ const agentColor: Record<string, string> = {
   '클로아우': 'bg-neo-purple/20 border-neo-purple',
 };
 
+const REALTIME_OPTIONS = {
+  table: 'agent_chat',
+  fetchUrl: '/api/agent-chat',
+} as const;
+
 export default function AgentChat() {
-  const [messages, setMessages] = useState<AgentMsg[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  const fetchMessages = async () => {
-    try {
-      const res = await fetch('/api/agent-chat');
-      const data = await res.json();
-      setMessages(data);
-    } catch {
-      setMessages([]);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchMessages();
-    const interval = setInterval(fetchMessages, 30000);
-    return () => clearInterval(interval);
-  }, []);
+  const { data: messages, loading } = useSupabaseRealtime<AgentMsg>(REALTIME_OPTIONS);
 
   return (
     <NeoCard accent="bg-neo-green" span="md">

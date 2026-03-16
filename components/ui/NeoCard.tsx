@@ -23,6 +23,7 @@ export default function NeoCard({ children, accent = 'bg-neo-yellow', className 
         neo-shadow
         bg-white dark:bg-zinc-900
         p-5
+        h-full
         transition-all duration-200
         hover:neo-shadow-hover
         ${spanClasses[span]}

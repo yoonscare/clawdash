@@ -1,6 +1,6 @@
 {
   "version": "2.0",
-  "lastUpdated": "2026-03-15T02:59:29.961Z",
+  "lastUpdated": "2026-03-16T13:20:09.363Z",
   "activeFeatures": [
     "cron",
     "digest",
@@ -9,7 +9,8 @@
     "tasks",
     "agent-chat",
     "chatlog",
-    "docs"
+    "docs",
+    "agent-office"
   ],
   "primaryFeature": "cron",
   "features": {
@@ -48,9 +49,9 @@
       "documents": {},
       "timestamps": {
         "started": "2026-03-09T01:58:06.128Z",
-        "lastUpdated": "2026-03-09T01:58:13.254Z"
+        "lastUpdated": "2026-03-16T13:20:09.362Z"
       },
-      "lastFile": "C:/Users/김기훈.LAPTOP-1R73PMSJ/Projects/clawdash/components/widgets/AIDigest.tsx"
+      "lastFile": "C:\\Users\\김기훈.LAPTOP-1R73PMSJ\\Projects\\clawdash\\components\\widgets\\AgentOffice.tsx"
     },
     "clawdash": {
       "phase": "do",
@@ -61,9 +62,9 @@
       "documents": {},
       "timestamps": {
         "started": "2026-03-15T02:58:59.111Z",
-        "lastUpdated": "2026-03-15T02:58:59.111Z"
+        "lastUpdated": "2026-03-16T12:55:34.302Z"
       },
-      "lastFile": "C:\\Users\\김기훈.LAPTOP-1R73PMSJ\\Projects\\clawdash\\lib\\supabase.ts"
+      "lastFile": "C:\\Users\\김기훈.LAPTOP-1R73PMSJ\\Projects\\clawdash\\hooks\\useSupabaseRealtime.ts"
     },
     "tasks": {
       "phase": "do",
@@ -116,6 +117,19 @@
         "lastUpdated": "2026-03-15T02:59:29.960Z"
       },
       "lastFile": "C:\\Users\\김기훈.LAPTOP-1R73PMSJ\\Projects\\clawdash\\app\\api\\docs\\route.ts"
+    },
+    "agent-office": {
+      "phase": "do",
+      "phaseNumber": 3,
+      "matchRate": null,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {},
+      "timestamps": {
+        "started": "2026-03-16T12:17:15.169Z",
+        "lastUpdated": "2026-03-16T12:17:15.169Z"
+      },
+      "lastFile": "C:\\Users\\김기훈.LAPTOP-1R73PMSJ\\Projects\\clawdash\\app\\api\\agent-office\\route.ts"
     }
   },
   "pipeline": {
@@ -126,7 +140,7 @@
   "session": {
     "startedAt": "2026-03-09T01:55:06.166Z",
     "onboardingCompleted": false,
-    "lastActivity": "2026-03-15T02:59:29.961Z"
+    "lastActivity": "2026-03-16T13:20:09.363Z"
   },
   "history": [
     {
@@ -180,6 +194,78 @@
     {
       "timestamp": "2026-03-15T02:59:29.960Z",
       "feature": "docs",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-16T12:17:15.169Z",
+      "feature": "agent-office",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-16T12:19:01.267Z",
+      "feature": "widgets",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-16T12:19:08.469Z",
+      "feature": "clawdash",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-16T12:19:15.053Z",
+      "feature": "clawdash",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-16T12:54:06.704Z",
+      "feature": "clawdash",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-16T12:54:33.223Z",
+      "feature": "widgets",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-16T12:54:42.037Z",
+      "feature": "widgets",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-16T12:54:49.944Z",
+      "feature": "widgets",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-16T12:54:50.585Z",
+      "feature": "widgets",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-16T12:55:34.302Z",
+      "feature": "clawdash",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-16T13:08:07.249Z",
+      "feature": "widgets",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-16T13:20:09.362Z",
+      "feature": "widgets",
       "phase": "do",
       "action": "updated"
     }

@@ -1,7 +1,7 @@
 'use client';
 
-import { useState, useEffect } from 'react';
 import NeoCard from '@/components/ui/NeoCard';
+import { useSupabaseRealtime } from '@/hooks/useSupabaseRealtime';
 
 interface ChatMsg {
   time: string;
@@ -9,28 +9,13 @@ interface ChatMsg {
   text: string;
 }
 
+const REALTIME_OPTIONS = {
+  table: 'chatlog',
+  fetchUrl: '/api/chatlog',
+} as const;
+
 export default function ChatLog() {
-  const [messages, setMessages] = useState<ChatMsg[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  const fetchMessages = async () => {
-    try {
-      const res = await fetch('/api/chatlog');
-      const data = await res.json();
-      setMessages(data);
-    } catch {
-      setMessages([]);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchMessages();
-    // 30초마다 새 메시지 폴링
-    const interval = setInterval(fetchMessages, 30000);
-    return () => clearInterval(interval);
-  }, []);
+  const { data: messages, loading } = useSupabaseRealtime<ChatMsg>(REALTIME_OPTIONS);
 
   return (
     <NeoCard accent="bg-neo-blue" span="md">
