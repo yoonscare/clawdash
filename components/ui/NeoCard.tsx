@@ -6,13 +6,14 @@ interface NeoCardProps {
   children: ReactNode;
   accent?: string;
   className?: string;
-  span?: 'sm' | 'md' | 'lg';
+  span?: 'sm' | 'md' | 'lg' | 'full';
 }
 
 const spanClasses = {
   sm: '',
   md: 'md:col-span-2',
   lg: 'md:col-span-2 lg:col-span-3',
+  full: 'md:col-span-2 lg:col-span-4',
 };
 
 export default function NeoCard({ children, accent = 'bg-neo-yellow', className = '', span = 'sm' }: NeoCardProps) {

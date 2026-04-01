@@ -1,15 +1,11 @@
 import Header from '@/components/layout/Header';
-import DashboardGrid from '@/components/layout/DashboardGrid';
 import ClockWidget from '@/components/widgets/ClockWidget';
 import WeatherCard from '@/components/widgets/WeatherCard';
 import AgentOffice from '@/components/widgets/AgentOffice';
 import QuickNote from '@/components/widgets/QuickNote';
-import CalendarWidget from '@/components/widgets/CalendarWidget';
-import CronMonitor from '@/components/widgets/CronMonitor';
 import ChatLog from '@/components/widgets/ChatLog';
 import MissionTracker from '@/components/widgets/MissionTracker';
 import TodoList from '@/components/widgets/TodoList';
-import AIDigest from '@/components/widgets/AIDigest';
 import HealthTracker from '@/components/widgets/HealthTracker';
 import TaskTracker from '@/components/widgets/TaskTracker';
 import AgentChat from '@/components/widgets/AgentChat';
@@ -31,20 +27,14 @@ export default function Home() {
           <AgentOffice />
         </div>
 
-        {/* Row 2: TodoList (1col) + AgentChat (2col) + TaskTracker (1col) */}
-        <div className="lg:col-span-1">
-          <TodoList />
-        </div>
-        <div className="lg:col-span-2">
+        {/* Row 2: AgentChat - 에이전트 대화 (전체 너비) */}
+        <div className="lg:col-span-4">
           <AgentChat />
         </div>
-        <div className="lg:col-span-1">
-          <TaskTracker />
-        </div>
 
-        {/* Row 3: Calendar (1col) + ChatLog (1col) + MissionTracker (1col) + QuickNote (1col) */}
+        {/* Row 3: TodoList (1col) + ChatLog (1col) + MissionTracker (1col) + TaskTracker (1col) */}
         <div className="lg:col-span-1">
-          <CalendarWidget />
+          <TodoList />
         </div>
         <div className="lg:col-span-1">
           <ChatLog />
@@ -53,29 +43,24 @@ export default function Home() {
           <MissionTracker />
         </div>
         <div className="lg:col-span-1">
-          <QuickNote />
+          <TaskTracker />
         </div>
 
-        {/* Row 4: CronMonitor (1col) + AIDigest (2col) + HealthTracker (1col) */}
+        {/* Row 4: QuickNote (1col) + HealthTracker (1col) + AutoresearchWidget (1col) + SecurityWidget (1col) */}
         <div className="lg:col-span-1">
-          <CronMonitor />
-        </div>
-        <div className="lg:col-span-2">
-          <AIDigest />
+          <QuickNote />
         </div>
         <div className="lg:col-span-1">
           <HealthTracker />
         </div>
-
-        {/* Row 5: AutoresearchWidget (1col) + SecurityWidget (2col) */}
         <div className="lg:col-span-1">
           <AutoresearchWidget />
         </div>
-        <div className="lg:col-span-2">
+        <div className="lg:col-span-1">
           <SecurityWidget />
         </div>
 
-        {/* Row 6: RoleDashboard (full width) */}
+        {/* Row 5: RoleDashboard (full width) */}
         <div className="lg:col-span-4">
           <RoleDashboard />
         </div>
