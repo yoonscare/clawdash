@@ -13,6 +13,9 @@ import AIDigest from '@/components/widgets/AIDigest';
 import HealthTracker from '@/components/widgets/HealthTracker';
 import TaskTracker from '@/components/widgets/TaskTracker';
 import AgentChat from '@/components/widgets/AgentChat';
+import AutoresearchWidget from '@/components/widgets/AutoresearchWidget';
+import RoleDashboard from '@/components/widgets/RoleDashboard';
+import SecurityWidget from '@/components/widgets/SecurityWidget';
 
 export default function Home() {
   return (
@@ -62,6 +65,19 @@ export default function Home() {
         </div>
         <div className="lg:col-span-1">
           <HealthTracker />
+        </div>
+
+        {/* Row 5: AutoresearchWidget (1col) + SecurityWidget (2col) */}
+        <div className="lg:col-span-1">
+          <AutoresearchWidget />
+        </div>
+        <div className="lg:col-span-2">
+          <SecurityWidget />
+        </div>
+
+        {/* Row 6: RoleDashboard (full width) */}
+        <div className="lg:col-span-4">
+          <RoleDashboard />
         </div>
       </div>
     </main>

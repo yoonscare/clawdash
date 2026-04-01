@@ -35,7 +35,7 @@ interface Character {
 
 // ─── Constants ──────────────────────────────────────────
 
-const CANVAS_W = 900;
+const CANVAS_W = 1200;
 const CANVAS_H = 400;
 const CHAR_W = 40;
 const CHAR_H = 48;
@@ -44,12 +44,41 @@ const MOVE_SPEED = 1.5;
 // Office layout coordinates - spread across the full canvas
 const DESK_1 = { x: 100, y: 200 };   // 클로's desk
 const DESK_2 = { x: 600, y: 200 };   // 클로아우's desk
+const DESK_3 = { x: 850, y: 200 };   // 클로비's desk
 const SOFA = { x: 350, y: 280 };
 const MEETING = { x: 350, y: 120 };
 const COFFEE = { x: 700, y: 100 };
 
 const CLAW_BUBBLES = ['잠수 좀 타볼게', '배 위에 올려놨어', '물살이 좀 거칠었어', '수달파워!', '로그 분석 중...'];
 const CLAWAU_BUBBLES = ['코드 리뷰 중...', '빌드 완료!', '버그 잡았다', '커밋 푸시 중...', '테스트 통과!'];
+const CLOVI_BUBBLES = ['기둥부터 세울게', '물길 막힌 데부터 뚫자', '먼저 돌아가는 걸 만들게', '구조부터 잡아보자', '프로토타입 먼저!'];
+
+const PROFILES = [
+  {
+    name: '클로',
+    emoji: '🦦',
+    role: '메인 비서 / 오케스트레이터',
+    intro: '흐름을 읽고 도구를 골라 일을 굴리는 수달 비서',
+    keywords: ['차분함', '유연함', '실용적'],
+    bg: 'bg-teal-100/60 dark:bg-teal-900/30',
+  },
+  {
+    name: '클로아우',
+    emoji: '🐾',
+    role: '간호교육 전문 브레인 / 문서 감수',
+    intro: '기준과 맥락을 지키며 문서와 내용을 단단하게 만드는 곰 브레인',
+    keywords: ['든든함', '성실함', '꼼꼼함'],
+    bg: 'bg-amber-100/60 dark:bg-amber-900/30',
+  },
+  {
+    name: '클로비',
+    emoji: '🦫',
+    role: '빌더 / 시스템 메이커',
+    intro: '구조를 짓고 자동화를 엮고 결과물이 남게 만드는 비버 빌더',
+    keywords: ['뚝심', '제작자기질', '공학적사고'],
+    bg: 'bg-orange-100/60 dark:bg-orange-900/30',
+  },
+];
 
 // ─── Pixel Art Drawing ──────────────────────────────────
 
@@ -168,6 +197,70 @@ function drawBear(ctx: CanvasRenderingContext2D, x: number, y: number, frame: nu
   ctx.fillStyle = '#92400E';
   ctx.fillRect(-12, 36 + (frame % 2 === 0 ? legOffset : 0), 10, 6);
   ctx.fillRect(2, 36 + (frame % 2 === 0 ? 0 : legOffset), 10, 6);
+
+  ctx.restore();
+}
+
+function drawBeaver(ctx: CanvasRenderingContext2D, x: number, y: number, frame: number, dir: 'left' | 'right', bob: number) {
+  const flip = dir === 'left' ? -1 : 1;
+  ctx.save();
+  ctx.translate(x + CHAR_W / 2, y + Math.sin(bob) * 2.5);
+  ctx.scale(flip, 1);
+
+  // Body (warm brown)
+  ctx.fillStyle = '#92400E';
+  ctx.fillRect(-14, 4, 28, 30);
+
+  // Belly (lighter tan)
+  ctx.fillStyle = '#D97706';
+  ctx.fillRect(-8, 8, 16, 22);
+
+  // Head
+  ctx.fillStyle = '#92400E';
+  ctx.fillRect(-16, -16, 32, 24);
+
+  // Round ears (small)
+  ctx.fillRect(-18, -16, 8, 8);
+  ctx.fillRect(10, -16, 8, 8);
+
+  // Inner ears
+  ctx.fillStyle = '#D97706';
+  ctx.fillRect(-16, -14, 4, 4);
+  ctx.fillRect(12, -14, 4, 4);
+
+  // Eyes
+  ctx.fillStyle = '#000';
+  ctx.fillRect(-10, -8, 6, 6);
+  ctx.fillRect(4, -8, 6, 6);
+
+  // Eye shine
+  ctx.fillStyle = '#FFF';
+  ctx.fillRect(-8, -8, 2, 2);
+  ctx.fillRect(6, -8, 2, 2);
+
+  // Nose (big round beaver nose)
+  ctx.fillStyle = '#5C2D0E';
+  ctx.fillRect(-3, -2, 6, 4);
+
+  // Buck teeth!
+  ctx.fillStyle = '#FFF';
+  ctx.fillRect(-3, 2, 3, 5);
+  ctx.fillRect(0, 2, 3, 5);
+  ctx.fillStyle = '#E5E7EB';
+  ctx.fillRect(-3, 5, 6, 1);
+
+  // Flat wide tail (beaver signature)
+  ctx.fillStyle = '#5C2D0E';
+  ctx.fillRect(-24, 20, 10, 14);
+  ctx.fillRect(-30, 24, 8, 8);
+  ctx.fillStyle = '#78350F';
+  ctx.fillRect(-28, 26, 6, 4);
+
+  // Feet - animate on walk
+  const legOffset = Math.sin(frame * 0.3) * 4;
+  ctx.fillStyle = '#78350F';
+  ctx.fillRect(-10, 34 + (frame % 2 === 0 ? legOffset : 0), 8, 6);
+  ctx.fillRect(2, 34 + (frame % 2 === 0 ? 0 : legOffset), 8, 6);
 
   ctx.restore();
 }
@@ -329,6 +422,11 @@ function drawOffice(ctx: CanvasRenderingContext2D, w: number, h: number) {
   ctx.fillRect(530, 80, 6, 200);
   ctx.fillStyle = '#8B4513';
   ctx.fillRect(532, 80, 3, 200);
+  // 3rd divider
+  ctx.fillStyle = '#A0522D';
+  ctx.fillRect(780, 80, 6, 200);
+  ctx.fillStyle = '#8B4513';
+  ctx.fillRect(782, 80, 3, 200);
 
   // ── Room labels (centered in rooms) ──
   ctx.font = 'bold 13px "Noto Sans KR", "JetBrains Mono", monospace';
@@ -348,6 +446,11 @@ function drawOffice(ctx: CanvasRenderingContext2D, w: number, h: number) {
   ctx.fillRect(600, 84, 140, 18);
   ctx.fillStyle = '#1A1510';
   ctx.fillText('클로아우의 방', 670, 97);
+  // Clovi's room
+  ctx.fillStyle = '#F59E0B';
+  ctx.fillRect(840, 84, 150, 18);
+  ctx.fillStyle = '#1A1510';
+  ctx.fillText('클로비의 작업실', 915, 97);
 
   // ── Clock on wall ──
   ctx.fillStyle = '#8B6914';
@@ -516,6 +619,100 @@ function drawOffice(ctx: CanvasRenderingContext2D, w: number, h: number) {
   ctx.fillStyle = '#22C55E'; ctx.fillRect(824, 148, 8, 30);
   ctx.fillStyle = '#F43F5E'; ctx.fillRect(834, 152, 5, 26);
   ctx.fillStyle = '#7C3AED'; ctx.fillRect(841, 150, 7, 28);
+
+  // ── Window 4 (클로비's room) ──
+  ctx.fillStyle = '#8B6914';
+  ctx.fillRect(960, 8, 90, 60);
+  ctx.fillStyle = '#A0522D';
+  ctx.fillRect(963, 11, 84, 54);
+  ctx.fillStyle = '#87CEEB';
+  ctx.fillRect(966, 14, 78, 48);
+  ctx.fillStyle = '#FFF8DC';
+  ctx.fillRect(966, 14, 78, 14);
+  ctx.fillStyle = '#FFEEBB';
+  ctx.fillRect(966, 28, 78, 8);
+  ctx.fillStyle = '#FFFFFF';
+  ctx.fillRect(980, 22, 14, 6);
+  ctx.fillRect(977, 25, 20, 5);
+  ctx.fillStyle = '#8B6914';
+  ctx.fillRect(1003, 14, 4, 48);
+  ctx.fillRect(966, 36, 78, 4);
+  ctx.fillStyle = 'rgba(255,248,220,0.06)';
+  ctx.fillRect(950, 80, 110, 140);
+
+  // ── 클로비's desk (right-most room) ──
+  ctx.fillStyle = '#A0522D';
+  ctx.fillRect(810, 200, 100, 36);
+  ctx.fillStyle = '#DEB887';
+  ctx.fillRect(813, 201, 94, 5);
+  ctx.fillStyle = '#8B4513';
+  ctx.fillRect(810, 236, 7, 20);
+  ctx.fillRect(903, 236, 7, 20);
+  ctx.fillStyle = 'rgba(0,0,0,0.12)';
+  ctx.fillRect(813, 256, 94, 5);
+  // Monitor
+  ctx.fillStyle = '#2A2520';
+  ctx.fillRect(832, 165, 56, 38);
+  ctx.fillStyle = '#F59E0B';
+  ctx.fillRect(836, 169, 48, 30);
+  ctx.fillStyle = '#FDE68A';
+  ctx.fillRect(840, 174, 20, 4);
+  ctx.fillRect(840, 182, 32, 4);
+  ctx.fillRect(840, 190, 14, 4);
+  ctx.fillStyle = '#2A2520';
+  ctx.fillRect(854, 201, 12, 5);
+  // Desk lamp
+  ctx.fillStyle = '#2A2520';
+  ctx.fillRect(900, 188, 4, 14);
+  ctx.fillStyle = '#DEB887';
+  ctx.fillRect(894, 182, 16, 8);
+  ctx.fillStyle = 'rgba(255,248,180,0.15)';
+  ctx.fillRect(884, 176, 36, 32);
+  // Toolbox on desk
+  ctx.fillStyle = '#EF4444';
+  ctx.fillRect(816, 203, 12, 8);
+  ctx.fillStyle = '#DC2626';
+  ctx.fillRect(818, 205, 8, 4);
+  // Chair
+  ctx.fillStyle = '#F59E0B';
+  ctx.fillRect(840, 248, 40, 20);
+  ctx.fillStyle = '#D97706';
+  ctx.fillRect(846, 234, 28, 18);
+  ctx.fillStyle = 'rgba(0,0,0,0.1)';
+  ctx.fillRect(842, 268, 36, 3);
+
+  // ── Workbench in Clovi's room ──
+  ctx.fillStyle = '#8B4513';
+  ctx.fillRect(1050, 110, 56, 100);
+  ctx.fillStyle = '#A0522D';
+  ctx.fillRect(1054, 114, 48, 92);
+  ctx.fillStyle = '#8B4513';
+  ctx.fillRect(1054, 146, 48, 3);
+  ctx.fillRect(1054, 180, 48, 3);
+  // Tools on shelf
+  ctx.fillStyle = '#6B7280'; ctx.fillRect(1058, 118, 7, 26);
+  ctx.fillStyle = '#EF4444'; ctx.fillRect(1067, 120, 5, 24);
+  ctx.fillStyle = '#3B82F6'; ctx.fillRect(1074, 116, 8, 28);
+  ctx.fillStyle = '#F59E0B'; ctx.fillRect(1084, 120, 5, 24);
+  ctx.fillStyle = '#10B981'; ctx.fillRect(1091, 118, 7, 26);
+  // Row 2
+  ctx.fillStyle = '#8B5CF6'; ctx.fillRect(1058, 150, 5, 28);
+  ctx.fillStyle = '#EC4899'; ctx.fillRect(1065, 152, 7, 26);
+  ctx.fillStyle = '#14B8A6'; ctx.fillRect(1074, 148, 8, 30);
+  ctx.fillStyle = '#F97316'; ctx.fillRect(1084, 152, 5, 26);
+  ctx.fillStyle = '#06B6D4'; ctx.fillRect(1091, 150, 7, 28);
+
+  // ── Plant in Clovi's room ──
+  ctx.fillStyle = '#B45309';
+  ctx.fillRect(1100, 310, 28, 28);
+  ctx.fillStyle = '#D97706';
+  ctx.fillRect(1096, 306, 36, 6);
+  ctx.fillStyle = '#16A34A';
+  ctx.fillRect(1096, 280, 12, 30);
+  ctx.fillStyle = '#22C55E';
+  ctx.fillRect(1112, 274, 12, 36);
+  ctx.fillStyle = '#15803D';
+  ctx.fillRect(1104, 270, 10, 18);
 
   // ── Lounge area (center) ──
   // Warm rug/carpet
@@ -708,6 +905,14 @@ export default function AgentOffice() {
       frame: 0, direction: 'left',
       bubbleText: '', bubbleTimer: 0, bobOffset: Math.PI,
     },
+    {
+      id: 'clovi',
+      x: DESK_3.x, y: DESK_3.y,
+      targetX: DESK_3.x, targetY: DESK_3.y,
+      state: 'working',
+      frame: 0, direction: 'left',
+      bubbleText: '', bubbleTimer: 0, bobOffset: Math.PI / 2,
+    },
   ]);
 
   // Fetch agent data
@@ -726,7 +931,7 @@ export default function AgentOffice() {
 
         if (agent.status === 'online') {
           chars[i].state = 'working';
-          const desk = i === 0 ? DESK_1 : DESK_2;
+          const desk = i === 0 ? DESK_1 : i === 1 ? DESK_2 : DESK_3;
           chars[i].targetX = desk.x;
           chars[i].targetY = desk.y;
         } else if (agent.status === 'idle') {
@@ -743,7 +948,7 @@ export default function AgentOffice() {
           }
         } else {
           chars[i].state = 'sleeping';
-          const desk = i === 0 ? DESK_1 : DESK_2;
+          const desk = i === 0 ? DESK_1 : i === 1 ? DESK_2 : DESK_3;
           chars[i].targetX = desk.x;
           chars[i].targetY = desk.y;
         }
@@ -764,11 +969,14 @@ export default function AgentOffice() {
     if (!meeting) return;
     const chars = charsRef.current;
     chars[0].state = 'meeting';
-    chars[0].targetX = MEETING.x - 30;
+    chars[0].targetX = MEETING.x - 40;
     chars[0].targetY = MEETING.y;
     chars[1].state = 'meeting';
-    chars[1].targetX = MEETING.x + 30;
+    chars[1].targetX = MEETING.x + 40;
     chars[1].targetY = MEETING.y;
+    chars[2].state = 'meeting';
+    chars[2].targetX = MEETING.x;
+    chars[2].targetY = MEETING.y + 30;
 
     const timer = setTimeout(() => setMeeting(false), 8000);
     return () => clearTimeout(timer);
@@ -808,7 +1016,7 @@ export default function AgentOffice() {
         if (char.bubbleTimer > 0) {
           char.bubbleTimer--;
         } else if (Math.random() < 0.003 && char.state !== 'sleeping') {
-          const bubbles = i === 0 ? CLAW_BUBBLES : CLAWAU_BUBBLES;
+          const bubbles = i === 0 ? CLAW_BUBBLES : i === 1 ? CLAWAU_BUBBLES : CLOVI_BUBBLES;
           char.bubbleText = bubbles[Math.floor(Math.random() * bubbles.length)];
           char.bubbleTimer = 150;
         }
@@ -824,8 +1032,10 @@ export default function AgentOffice() {
       chars.forEach((char, i) => {
         if (i === 0) {
           drawOtter(ctx, char.x, char.y, frame, char.direction, char.bobOffset);
-        } else {
+        } else if (i === 1) {
           drawBear(ctx, char.x, char.y, frame, char.direction, char.bobOffset);
+        } else {
+          drawBeaver(ctx, char.x, char.y, frame, char.direction, char.bobOffset);
         }
 
         if (char.state === 'sleeping') {
@@ -921,8 +1131,42 @@ export default function AgentOffice() {
         />
       </div>
 
+      {/* Character Profile Cards */}
+      <div className="grid grid-cols-3 gap-2 mb-3">
+        {PROFILES.map((p) => {
+          const agent = agents.find((a) => a.name === p.name);
+          const status = agent?.status || 'offline';
+          return (
+            <div
+              key={p.name}
+              className={`border-4 border-black dark:border-neo-yellow p-3 ${p.bg}`}
+            >
+              <div className="flex items-center gap-1.5 mb-1">
+                <span className="text-lg">{p.emoji}</span>
+                <span className="font-mono text-xs font-bold">{p.name}</span>
+                <NeoBadge variant={statusBadge(status)}>
+                  {statusLabel(status)}
+                </NeoBadge>
+              </div>
+              <div className="font-mono text-[10px] font-bold opacity-80 mb-1">{p.role}</div>
+              <div className="font-mono text-[10px] opacity-60 mb-1.5 leading-relaxed">{p.intro}</div>
+              <div className="flex flex-wrap gap-1">
+                {p.keywords.map((kw) => (
+                  <span
+                    key={kw}
+                    className="font-mono text-[9px] px-1.5 py-0.5 border-2 border-black dark:border-neo-yellow bg-white/40 dark:bg-black/30"
+                  >
+                    {kw}
+                  </span>
+                ))}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
       {/* Agent Status Cards */}
-      <div className="grid grid-cols-2 gap-2">
+      <div className="grid grid-cols-3 gap-2">
         {agents.map((agent) => (
           <div
             key={agent.id}
@@ -952,7 +1196,7 @@ export default function AgentOffice() {
           </div>
         ))}
         {agents.length === 0 && (
-          <div className="col-span-2 text-center font-mono text-xs opacity-50 py-2">
+          <div className="col-span-3 text-center font-mono text-xs opacity-50 py-2">
             에이전트 데이터 로딩 중...
           </div>
         )}

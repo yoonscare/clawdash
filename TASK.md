@@ -1,94 +1,42 @@
-# ClawDash Development Task
+# TASK: Upgrade AgentOffice to ClawFamily Dashboard
 
-## What to Build
-ClawDash — an open-source, AI-powered customizable dashboard generator for OpenClaw users.
-Design: **Neo Brutalism** (bold borders, hard shadows, vibrant color blocks, monospace typography)
+## Goal
+Upgrade the AgentOffice widget to show 3 ClawFamily characters with profile cards and recent chat.
 
-## Tech Stack
-- Next.js 15 (App Router, TypeScript)
-- Tailwind CSS v4
-- Recharts (charts)
-- NO database — JSON file based
+## 1. Add 클로비(Beaver 🦫) as 3rd character in AgentOffice.tsx
 
-## Required Files
+- Draw a pixel art beaver (brown/amber tones, flat wide tail, buck teeth)
+- Add 3rd room: '클로비의 작업실' (right side)
+- 클로비 gets own desk, workspace area
+- Speech bubbles: ['기둥부터 세울게', '물길 막힌 데부터 뚫자', '먼저 돌아가는 걸 만들게', '구조부터 잡아보자', '프로토타입 먼저!']
+- Increase CANVAS_W to ~1200 to fit 3 rooms
+- Add DESK_3 coordinates for 클로비
+- Add 3rd room divider, label, desk, chair, bookshelf similar style to existing rooms
 
-### 1. README.md (Korean + English bilingual)
-- Project description, screenshots section
-- Quick Start (npx, manual)
-- Deployment guides: Vercel, Tailscale Serve, Docker
-- Widget list
-- Contributing guide
-- License MIT
+## 2. Add Character Profile Cards below canvas
 
-### 2. Neo Brutalism Design System
-Create `lib/themes/neo-brutalism.ts` and UI components:
-- `NeoCard` — border-4 border-black, shadow-[8px_8px_0_#000], hover lift
-- `NeoButton` — bold, uppercase, hard shadow
-- `NeoProgress` — thick bar, no rounded corners
-- `NeoBadge` — status badges
-- `NeoChart` — recharts wrapper with neo styling
+3 cards in a grid, each showing:
+- Emoji + name
+- Role: 클로=메인 비서/오케스트레이터, 클로아우=간호교육 전문 브레인/문서 감수, 클로비=빌더/시스템 메이커
+- Intro: 클로=흐름을 읽고 도구를 골라 일을 굴리는 수달 비서, 클로아우=기준과 맥락을 지키며 문서와 내용을 단단하게 만드는 곰 브레인, 클로비=구조를 짓고 자동화를 엮고 결과물이 남게 만드는 비버 빌더
+- Keywords: 클로=차분함·유연함·실용적, 클로아우=든든함·성실함·꼼꼼함, 클로비=뚝심·제작자기질·공학적사고
+- Status badge (online/idle/offline)
+- Neo-brutalism style, accent colors: teal=클로, amber=클로아우, brown=클로비
 
-Color palette:
-- Background: #FFFEF2 (light) / #0A0A0A (dark)
-- Yellow: #FFE66D, Pink: #FF6B9D, Cyan: #4ECDC4
-- Red: #FF4757, Purple: #A855F7, Blue: #3B82F6
+## 3. Show recent chat messages
 
-### 3. Dashboard Layout
-- `app/page.tsx` — responsive grid of widgets
-- `app/layout.tsx` — Neo Brutalism global styles, dark mode support
-- `components/layout/DashboardGrid.tsx` — CSS grid, responsive
-- `components/layout/Header.tsx` — title + dark mode toggle + settings
+- Fetch from /api/agent-chat
+- Show last 5 messages with from→to direction
+- Add 클로비 mappings: emoji=🦫, color=brown/amber
 
-### 4. Widget Components (build ALL of these)
-Each widget uses NeoCard wrapper with appropriate color:
+## 4. Update agent status grid to 3 columns
 
-a) **ClockWidget** (sm, utility) — current time + date, neo style
-b) **WeatherCard** (sm, info) — wttr.in API, temperature + icon
-c) **CryptoTracker** (lg, finance) — BTC price from public API, 24h chart, portfolio value
-d) **GlucoseMonitor** (lg, health) — glucose value + trend arrow + 24h sparkline + TIR donut
-e) **AppleHealthSync** (md, health) — steps, heart rate, sleep, calories in grid
-f) **NewsFeed** (lg, info) — scrollable news items with titles + timestamps
-g) **AgentStatus** (sm, agent) — OpenClaw agent online/offline + uptime
-h) **CronMonitor** (md, agent) — list of cron jobs with last run status
-i) **QuickNote** (sm, productivity) — simple text input that saves to JSON
-j) **CalendarWidget** (md, productivity) — today's events list
+- Add 클로비 to agents array with fallback data
+- 3-col grid for status cards
 
-### 5. API Routes
-- `app/api/health/route.ts` — POST to receive Apple Health data
-- `app/api/widgets/route.ts` — GET widget data from JSON files
-- `app/api/config/route.ts` — GET/PUT dashboard configuration
-
-### 6. Sample Data
-Create `data/` directory with sample JSON files for demo:
-- `data/config.json` — dashboard layout config
-- `data/glucose.json` — sample glucose readings
-- `data/health.json` — sample health data
-- `data/news.json` — sample news items
-- `data/crypto.json` — sample crypto data
-
-### 7. Workspace Analyzer (basic)
-`lib/analyzer/index.ts` — parse SOUL.md, MEMORY.md, TOOLS.md, HEARTBEAT.md
-Extract keywords → suggest widgets. This is the MVP version.
-
-### 8. Docker Support
-- `Dockerfile` (multi-stage build)
-- `docker-compose.yml`
-
-### 9. Deployment Docs
-- `docs/DEPLOYMENT.md` — Vercel + Tailscale + Docker step-by-step
-- `docs/WIDGETS.md` — how to create custom widgets
-
-### 10. package.json
-Name: clawdash, description in English, scripts for dev/build/start
-
-## Design Rules
-- ALL cards must use Neo Brutalism style (border-4, hard shadow, bold colors)
-- Dark mode must work (toggle in header)
-- Responsive: mobile 1 col, tablet 2 col, desktop 3-4 col
-- Typography: JetBrains Mono for headings/numbers, Inter for body
-- Every widget card has a distinct accent color
-- Hover effects: shadow grows + card lifts slightly
-
-## When Done
-1. Git add, commit, push to origin main
-2. Run: /Users/moon/moltbot/node_modules/.pnpm/node_modules/.bin/openclaw system event --text "ClawDash 개발 완료! GitHub에 푸시했어요. https://github.com/reallygood83/clawdash" --mode now
+## Design
+- Neo-brutalism (thick black borders, bold mono fonts)
+- Dark mode support (dark: classes)
+- Pixelated canvas rendering
+- Only modify frontend: AgentOffice.tsx and AgentChat.tsx
+- Do NOT touch API routes

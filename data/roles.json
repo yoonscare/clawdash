@@ -1,0 +1,24 @@
+{
+  "claw": [
+    { "title": "책 작업", "emoji": "📚", "status": "active", "desc": "간호인을 위한 AI 실전서 100쪽 목표" },
+    { "title": "강의 준비", "emoji": "🎓", "status": "active", "desc": "전문대교육협의회, 지피터스 강의자료" },
+    { "title": "인증평가 보조", "emoji": "📋", "status": "active", "desc": "보고서 구조화, 문서 정리" },
+    { "title": "AI 공부 / 도구 정리", "emoji": "🧠", "status": "active", "desc": "도구 학습, Threads 정리, 노트 축적" },
+    { "title": "사례글 작성", "emoji": "✍️", "status": "active", "desc": "지피터스 사례글, 실험 후기" },
+    { "title": "일상 대화 / 일정", "emoji": "💬", "status": "active", "desc": "텔레그램 DM, 캘린더, 메모" },
+    { "title": "하트비트", "emoji": "💓", "status": "active", "desc": "이메일/캘린더 자율 점검" }
+  ],
+  "rumi": [
+    { "title": "AI 소셜 다이제스트", "emoji": "🗞️", "status": "active", "desc": "매일 8시, Threads/X 수집" },
+    { "title": "카드뉴스 자동 업데이트", "emoji": "📰", "status": "active", "desc": "격일 10시, Vercel 배포" },
+    { "title": "블로그 자동 발행", "emoji": "📝", "status": "planned", "desc": "Blogger API 자동 발행" },
+    { "title": "인스타 카드 자동 생성", "emoji": "📸", "status": "planned", "desc": "1080×1080 카드 + Instagram API" },
+    { "title": "유튜브 쇼츠 자동 생성", "emoji": "🎬", "status": "future", "desc": "TTS + ffmpeg + YouTube API" },
+    { "title": "수익 구조 실험", "emoji": "💰", "status": "future", "desc": "AdSense + 쿠팡 파트너스" }
+  ],
+  "shared": [
+    { "title": "옵시디언 볼트", "emoji": "📓", "status": "active", "desc": "공유 읽기 + 담당별 쓰기" },
+    { "title": "텔레그램 그룹방", "emoji": "👥", "status": "active", "desc": "클로·루미·루미채 3봇 그룹" },
+    { "title": "보안 원칙", "emoji": "🔒", "status": "active", "desc": "클로 + 루미 공통 적용" }
+  ]
+}

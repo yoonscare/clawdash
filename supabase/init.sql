@@ -53,3 +53,19 @@ CREATE POLICY "Allow all access" ON chatlog FOR ALL USING (true) WITH CHECK (tru
 
 ALTER TABLE docs ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "Allow all access" ON docs FOR ALL USING (true) WITH CHECK (true);
+
+-- Autoresearch table
+CREATE TABLE IF NOT EXISTS autoresearch (
+  id serial PRIMARY KEY,
+  skill_name text UNIQUE NOT NULL,
+  status text DEFAULT 'running',
+  baseline_score numeric DEFAULT 0,
+  best_score numeric DEFAULT 0,
+  experiments jsonb DEFAULT '[]'::jsonb,
+  eval_breakdown jsonb DEFAULT '[]'::jsonb,
+  updated_at timestamptz DEFAULT now(),
+  created_at timestamptz DEFAULT now()
+);
+
+ALTER TABLE autoresearch ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Allow all access" ON autoresearch FOR ALL USING (true) WITH CHECK (true);

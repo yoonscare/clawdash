@@ -112,6 +112,7 @@ export async function GET() {
     const agents: AgentInfo[] = [
       buildAgentInfo('claw', '클로', '🦦', 'main', 'agent:main:main'),
       buildAgentInfo('clawau', '클로아우', '🐻', 'clawau', 'agent:clawau:main'),
+      buildAgentInfo('clovi', '클로비', '🦫', 'clovi', 'agent:clovi:main'),
     ];
 
     return NextResponse.json({ agents, timestamp: Date.now() });
@@ -121,6 +122,7 @@ export async function GET() {
       agents: [
         { id: 'claw', name: '클로', emoji: '🦦', status: 'offline', lastActivity: '-', currentTask: '오프라인', model: '-', tokenUsage: 0 },
         { id: 'clawau', name: '클로아우', emoji: '🐻', status: 'offline', lastActivity: '-', currentTask: '오프라인', model: '-', tokenUsage: 0 },
+        { id: 'clovi', name: '클로비', emoji: '🦫', status: 'offline', lastActivity: '-', currentTask: '오프라인', model: '-', tokenUsage: 0 },
       ],
       timestamp: Date.now(),
     });
