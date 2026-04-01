@@ -16,14 +16,14 @@ export default function MissionTracker() {
   const [missions] = useState<Mission[]>(missionsData);
 
   return (
-    <NeoCard accent="bg-neo-yellow" span="md">
-      <h3 className="font-mono text-xs font-bold uppercase mb-3 opacity-60">🎯 미션 트래커</h3>
+    <NeoCard span="md">
+      <h3 className="font-mono text-xs font-bold mb-3 opacity-60">🎯 미션 트래커</h3>
       <div className="space-y-3">
         {missions.map((m, i) => (
-          <div key={i} className="border-4 border-black dark:border-neo-yellow p-2">
-            <div className="flex items-center justify-between mb-1">
+          <div key={i} className="rounded-xl border border-black/5 dark:border-white/5 bg-gray-50/50 dark:bg-zinc-800/50 p-3">
+            <div className="flex items-center justify-between mb-2">
               <span className="text-sm font-bold">{m.emoji} {m.title}</span>
-              <span className={`font-mono text-xs font-bold px-2 py-0.5 border-2 border-black dark:border-neo-yellow ${m.status === 'done' ? 'bg-neo-cyan' : 'bg-neo-yellow'}`}>
+              <span className={`font-mono text-xs font-bold px-2.5 py-0.5 rounded-full border ${m.status === 'done' ? 'bg-neo-cyan/20 text-neo-cyan border-neo-cyan/30' : 'bg-neo-yellow/20 text-amber-600 dark:text-neo-yellow border-neo-yellow/30'}`}>
                 {m.status === 'done' ? '완료' : '진행중'}
               </span>
             </div>

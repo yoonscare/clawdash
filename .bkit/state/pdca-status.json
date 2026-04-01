@@ -1,6 +1,6 @@
 {
   "version": "3.0",
-  "lastUpdated": "2026-04-01T04:39:39.106Z",
+  "lastUpdated": "2026-04-01T06:04:36.612Z",
   "activeFeatures": [
     "cron",
     "digest",
@@ -11,7 +11,8 @@
     "chatlog",
     "docs",
     "agent-office",
-    "ui"
+    "ui",
+    "layout"
   ],
   "primaryFeature": "cron",
   "features": {
@@ -84,9 +85,9 @@
       "documents": {},
       "timestamps": {
         "started": "2026-03-09T01:58:06.128Z",
-        "lastUpdated": "2026-04-01T04:39:39.106Z"
+        "lastUpdated": "2026-04-01T06:04:36.612Z"
       },
-      "lastFile": "C:\\Users\\김기훈.LAPTOP-1R73PMSJ\\Projects\\clawdash\\components\\widgets\\AgentOffice.tsx",
+      "lastFile": "C:\\Users\\김기훈.LAPTOP-1R73PMSJ\\Projects\\clawdash\\components\\widgets\\CronMonitor.tsx",
       "stateMachine": {
         "currentState": "do",
         "previousState": null,
@@ -114,9 +115,9 @@
       "documents": {},
       "timestamps": {
         "started": "2026-03-15T02:58:59.111Z",
-        "lastUpdated": "2026-03-16T12:55:34.302Z"
+        "lastUpdated": "2026-04-01T05:59:08.281Z"
       },
-      "lastFile": "C:\\Users\\김기훈.LAPTOP-1R73PMSJ\\Projects\\clawdash\\hooks\\useSupabaseRealtime.ts",
+      "lastFile": "C:\\Users\\김기훈.LAPTOP-1R73PMSJ\\Projects\\clawdash\\app\\page.tsx",
       "stateMachine": {
         "currentState": "do",
         "previousState": null,
@@ -294,9 +295,22 @@
       "documents": {},
       "timestamps": {
         "started": "2026-04-01T04:36:08.990Z",
-        "lastUpdated": "2026-04-01T04:36:08.991Z"
+        "lastUpdated": "2026-04-01T05:58:32.109Z"
       },
-      "lastFile": "C:\\Users\\김기훈.LAPTOP-1R73PMSJ\\Projects\\clawdash\\components\\ui\\CharacterAvatar.tsx"
+      "lastFile": "C:\\Users\\김기훈.LAPTOP-1R73PMSJ\\Projects\\clawdash\\components\\ui\\NeoChart.tsx"
+    },
+    "layout": {
+      "phase": "do",
+      "phaseNumber": 3,
+      "matchRate": null,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {},
+      "timestamps": {
+        "started": "2026-04-01T05:59:01.473Z",
+        "lastUpdated": "2026-04-01T05:59:01.473Z"
+      },
+      "lastFile": "C:\\Users\\김기훈.LAPTOP-1R73PMSJ\\Projects\\clawdash\\components\\layout\\Header.tsx"
     }
   },
   "pipeline": {
@@ -307,7 +321,7 @@
   "session": {
     "startedAt": "2026-03-09T01:55:06.166Z",
     "onboardingCompleted": false,
-    "lastActivity": "2026-04-01T04:39:39.106Z"
+    "lastActivity": "2026-04-01T06:04:36.612Z"
   },
   "history": [
     {
@@ -624,6 +638,216 @@
     },
     {
       "timestamp": "2026-04-01T04:39:39.106Z",
+      "feature": "widgets",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-01T05:58:11.680Z",
+      "feature": "ui",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-01T05:58:14.856Z",
+      "feature": "ui",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-01T05:58:18.496Z",
+      "feature": "ui",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-01T05:58:22.825Z",
+      "feature": "ui",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-01T05:58:32.109Z",
+      "feature": "ui",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-01T05:59:01.473Z",
+      "feature": "layout",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-01T05:59:08.281Z",
+      "feature": "clawdash",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-01T05:59:28.936Z",
+      "feature": "widgets",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-01T05:59:35.818Z",
+      "feature": "widgets",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-01T05:59:41.165Z",
+      "feature": "widgets",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-01T05:59:49.179Z",
+      "feature": "widgets",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-01T06:00:28.704Z",
+      "feature": "widgets",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-01T06:00:44.236Z",
+      "feature": "widgets",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-01T06:00:45.482Z",
+      "feature": "widgets",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-01T06:00:49.331Z",
+      "feature": "widgets",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-01T06:00:53.197Z",
+      "feature": "widgets",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-01T06:00:54.959Z",
+      "feature": "widgets",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-01T06:00:57.217Z",
+      "feature": "widgets",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-01T06:00:58.770Z",
+      "feature": "widgets",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-01T06:01:02.820Z",
+      "feature": "widgets",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-01T06:01:41.234Z",
+      "feature": "widgets",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-01T06:01:53.878Z",
+      "feature": "widgets",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-01T06:02:08.903Z",
+      "feature": "widgets",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-01T06:02:19.312Z",
+      "feature": "widgets",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-01T06:02:56.446Z",
+      "feature": "widgets",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-01T06:03:05.143Z",
+      "feature": "widgets",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-01T06:03:23.611Z",
+      "feature": "widgets",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-01T06:03:25.620Z",
+      "feature": "widgets",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-01T06:03:28.982Z",
+      "feature": "widgets",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-01T06:03:29.882Z",
+      "feature": "widgets",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-01T06:03:31.633Z",
+      "feature": "widgets",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-01T06:03:33.772Z",
+      "feature": "widgets",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-01T06:03:52.853Z",
+      "feature": "widgets",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-01T06:03:54.770Z",
+      "feature": "widgets",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-01T06:04:36.612Z",
       "feature": "widgets",
       "phase": "do",
       "action": "updated"

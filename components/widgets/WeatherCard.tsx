@@ -35,8 +35,8 @@ export default function WeatherCard() {
   }, []);
 
   return (
-    <NeoCard accent="bg-neo-cyan">
-      <h3 className="font-mono text-xs font-bold uppercase mb-2 opacity-60">🌤 서울 날씨</h3>
+    <NeoCard>
+      <h3 className="font-mono text-xs font-bold mb-2 opacity-60">🌤 서울 날씨</h3>
       {weather ? (
         <>
           <div className="flex items-center gap-3">

@@ -8,10 +8,10 @@ interface NeoBadgeProps {
 }
 
 const variants = {
-  success: 'bg-neo-cyan text-black',
-  warning: 'bg-neo-yellow text-black',
-  error: 'bg-neo-red text-white',
-  info: 'bg-neo-blue text-white',
+  success: 'bg-neo-cyan/20 text-neo-cyan border-neo-cyan/30',
+  warning: 'bg-neo-yellow/20 text-amber-600 dark:text-neo-yellow border-neo-yellow/30',
+  error: 'bg-neo-red/20 text-neo-red border-neo-red/30',
+  info: 'bg-neo-blue/20 text-neo-blue border-neo-blue/30',
 };
 
 export default function NeoBadge({ children, variant = 'info' }: NeoBadgeProps) {
@@ -19,8 +19,9 @@ export default function NeoBadge({ children, variant = 'info' }: NeoBadgeProps) 
     <span
       className={`
         inline-block px-3 py-1
-        border-2 border-black dark:border-neo-yellow
-        font-mono text-xs font-bold uppercase
+        border
+        rounded-full
+        font-mono text-xs font-bold
         ${variants[variant]}
       `}
     >

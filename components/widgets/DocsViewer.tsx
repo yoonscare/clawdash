@@ -36,7 +36,7 @@ export default function DocsViewer() {
       ) : (
         <div className="space-y-2 max-h-64 overflow-y-auto">
           {docs.map((doc, i) => (
-            <div key={i} className="flex items-center gap-3 border-4 border-black dark:border-neo-yellow p-2 hover:bg-neo-blue/10 transition-colors">
+            <div key={i} className="flex items-center gap-3 rounded-xl border border-gray-200 dark:border-zinc-700 p-2 hover:bg-neo-blue/10 transition-colors">
               <span className="text-xl shrink-0">{doc.emoji}</span>
               <div className="flex-1 min-w-0">
                 <div className="text-sm font-bold truncate">{doc.title}</div>

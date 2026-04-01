@@ -16,13 +16,14 @@ const spanClasses = {
   full: 'md:col-span-2 lg:col-span-4',
 };
 
-export default function NeoCard({ children, accent = 'bg-neo-yellow', className = '', span = 'sm' }: NeoCardProps) {
+export default function NeoCard({ children, className = '', span = 'sm' }: NeoCardProps) {
   return (
     <div
       className={`
-        border-4 border-black dark:border-neo-yellow
+        border-2 border-black/10 dark:border-white/10
+        rounded-2xl
         neo-shadow
-        bg-white dark:bg-zinc-900
+        bg-white dark:bg-zinc-900/80
         p-5
         h-full
         transition-all duration-200
@@ -31,7 +32,6 @@ export default function NeoCard({ children, accent = 'bg-neo-yellow', className 
         ${className}
       `}
     >
-      <div className={`h-2 ${accent} -mx-5 -mt-5 mb-4 border-b-4 border-black dark:border-neo-yellow`} />
       {children}
     </div>
   );

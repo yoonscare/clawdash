@@ -30,7 +30,7 @@ export default function AgentStatus() {
         <>
           <div className="flex items-center gap-2 mb-3">
             <div
-              className={`w-3 h-3 border-2 border-black dark:border-neo-yellow ${agent.status === 'online' ? 'bg-neo-cyan' : 'bg-neo-red'}`}
+              className={`w-3 h-3 rounded-full ${agent.status === 'online' ? 'bg-neo-cyan' : 'bg-neo-red'}`}
             />
             <span className="font-mono font-bold">{agent.name}</span>
           </div>

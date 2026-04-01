@@ -56,7 +56,7 @@ export default function CalendarWidget() {
           <div className="text-sm opacity-50 font-mono">오늘 일정이 없어요 🎉</div>
         ) : (
           events.map((evt, i) => (
-            <div key={i} className="flex items-center gap-3 border-4 border-black dark:border-neo-yellow p-2 group">
+            <div key={i} className="flex items-center gap-3 rounded-xl border border-gray-200 dark:border-zinc-700 p-2 group">
               <div className={`w-2 h-8 shrink-0 ${evt.color}`} />
               <div className="font-mono text-xs font-bold opacity-60 w-12">{evt.time}</div>
               <div className="text-sm font-bold flex-1">{evt.title}</div>
@@ -70,17 +70,17 @@ export default function CalendarWidget() {
       </div>
 
       {showInput ? (
-        <div className="border-4 border-black dark:border-neo-yellow p-2 space-y-2">
+        <div className="rounded-xl border border-gray-200 dark:border-zinc-700 p-2 space-y-2">
           <div className="flex gap-2">
             <input
               type="time" value={time} onChange={e => setTime(e.target.value)}
-              className="w-24 p-1 border-3 border-black dark:border-neo-yellow bg-transparent text-sm focus:outline-none"
+              className="w-24 p-1 rounded-lg border border-gray-200 dark:border-zinc-700 bg-transparent text-sm focus:outline-none focus:ring-2 focus:ring-neo-cyan/30"
             />
             <input
               value={title} onChange={e => setTitle(e.target.value)}
               onKeyDown={e => e.key === 'Enter' && add()}
               placeholder="일정 이름..."
-              className="flex-1 p-1 border-3 border-black dark:border-neo-yellow bg-transparent text-sm focus:outline-none"
+              className="flex-1 p-1 rounded-lg border border-gray-200 dark:border-zinc-700 bg-transparent text-sm focus:outline-none focus:ring-2 focus:ring-neo-cyan/30"
             />
           </div>
           <div className="flex gap-2">

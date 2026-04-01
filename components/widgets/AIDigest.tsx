@@ -33,7 +33,7 @@ export default function AIDigest() {
       ) : (
         <div className="space-y-3">
           {items.map((item, i) => (
-            <div key={i} className="border-4 border-black dark:border-neo-yellow p-3">
+            <div key={i} className="rounded-2xl border border-gray-200 dark:border-zinc-700 p-3">
               <div className="flex items-center gap-2 mb-1">
                 <span className="font-mono text-xs opacity-40">{item.date}</span>
               </div>

@@ -35,8 +35,8 @@ export default function AutoresearchWidget() {
   const completedSkills = items.filter(i => i.status === 'complete').length;
 
   return (
-    <NeoCard accent="bg-neo-green">
-      <h3 className="font-mono text-xs font-bold uppercase mb-3 opacity-60">🧬 Autoresearch</h3>
+    <NeoCard>
+      <h3 className="font-mono text-xs font-bold mb-3 opacity-60">🧬 Autoresearch</h3>
       <div className="flex items-center justify-between mb-2">
         <span className="font-mono text-xs opacity-50">완료: {completedSkills}/{totalSkills}</span>
       </div>
@@ -52,12 +52,12 @@ export default function AutoresearchWidget() {
             const baselinePct = item.baseline_score > 0 ? Math.round(item.baseline_score) : 0;
 
             return (
-              <div key={item.id ?? item.skill_name} className="border-4 border-black dark:border-neo-yellow p-3">
+              <div key={item.id ?? item.skill_name} className="rounded-xl border border-black/5 dark:border-white/5 bg-gray-50/50 dark:bg-zinc-800/50 p-3">
                 {/* Header: name + status badge */}
                 <div className="flex items-center justify-between mb-2">
                   <span className="font-mono text-sm font-bold truncate">{item.skill_name}</span>
-                  <span className={`font-mono text-xs font-bold px-1.5 py-0.5 border-2 border-black dark:border-neo-yellow shrink-0 ${
-                    item.status === 'complete' ? 'bg-neo-green' : item.status === 'running' ? 'bg-neo-yellow' : 'bg-neo-pink'
+                  <span className={`font-mono text-xs font-bold px-2 py-0.5 rounded-full border shrink-0 ${
+                    item.status === 'complete' ? 'bg-neo-green/20 text-neo-green border-neo-green/30' : item.status === 'running' ? 'bg-neo-yellow/20 text-amber-600 dark:text-neo-yellow border-neo-yellow/30' : 'bg-neo-pink/20 text-neo-pink border-neo-pink/30'
                   }`}>
                     {item.status === 'complete' ? '완료' : item.status === 'running' ? '실행중' : item.status}
                   </span>
@@ -74,15 +74,15 @@ export default function AutoresearchWidget() {
                 </div>
 
                 {/* Progress bar */}
-                <div className="relative h-3 border-2 border-black dark:border-neo-yellow bg-white dark:bg-zinc-800">
+                <div className="relative h-3 rounded-full border border-black/10 dark:border-white/10 bg-white dark:bg-zinc-800 overflow-hidden">
                   {/* Baseline marker */}
                   <div
-                    className="absolute top-0 h-full bg-neo-pink/40"
+                    className="absolute top-0 h-full bg-neo-pink/30 rounded-full"
                     style={{ width: `${baselinePct}%` }}
                   />
                   {/* Best score */}
                   <div
-                    className="absolute top-0 h-full bg-neo-green"
+                    className="absolute top-0 h-full bg-neo-green rounded-full"
                     style={{ width: `${progressPct}%` }}
                   />
                 </div>

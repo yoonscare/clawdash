@@ -18,12 +18,13 @@ export default function NeoButton({ children, variant = 'primary', className = '
     <button
       className={`
         px-4 py-2
-        border-4 border-black dark:border-neo-yellow
+        border-2 border-black/10 dark:border-white/10
+        rounded-xl
         neo-shadow-sm
-        font-mono font-bold uppercase text-sm
+        font-mono font-bold text-sm
         transition-all duration-200
         hover:neo-shadow-hover
-        active:shadow-none active:translate-x-1 active:translate-y-1
+        active:shadow-none active:translate-y-0.5
         ${variants[variant]}
         ${className}
       `}

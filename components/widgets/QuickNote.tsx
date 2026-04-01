@@ -26,7 +26,7 @@ export default function QuickNote() {
         value={note}
         onChange={e => setNote(e.target.value)}
         placeholder="Type a note..."
-        className="w-full h-20 p-2 border-4 border-black dark:border-neo-yellow bg-transparent text-sm resize-none focus:outline-none focus:border-neo-pink"
+        className="w-full h-20 p-2 rounded-xl border border-gray-200 dark:border-zinc-700 bg-transparent text-sm resize-none focus:outline-none focus:ring-2 focus:ring-neo-pink/30"
       />
       <div className="flex items-center justify-between mt-2">
         <NeoButton variant="secondary" onClick={save}>Save</NeoButton>

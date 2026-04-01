@@ -25,8 +25,8 @@ export default function TaskTracker() {
   });
 
   return (
-    <NeoCard accent="bg-neo-cyan" span="md">
-      <h3 className="font-mono text-xs font-bold uppercase mb-3 opacity-60">📋 클로 작업 로그</h3>
+    <NeoCard span="md">
+      <h3 className="font-mono text-xs font-bold mb-3 opacity-60">📋 클로 작업 로그</h3>
       <div className="flex items-center justify-between mb-2">
         <span className="font-mono text-xs opacity-50">오늘 완료: {todayTasks.length}건</span>
         <span className="font-mono text-xs opacity-50">전체: {tasks.length}건</span>
@@ -38,14 +38,14 @@ export default function TaskTracker() {
       ) : (
         <div className="space-y-2 max-h-64 overflow-y-auto">
           {[...tasks].reverse().map((t, i) => (
-            <div key={i} className="flex items-start gap-2 border-4 border-black dark:border-neo-yellow p-2">
+            <div key={i} className="flex items-start gap-2 rounded-xl border border-black/5 dark:border-white/5 bg-gray-50/50 dark:bg-zinc-800/50 p-3">
               <span className="text-lg shrink-0">{t.emoji}</span>
               <div className="flex-1 min-w-0">
                 <div className="text-sm font-bold">{t.task}</div>
                 <div className="font-mono text-xs opacity-40">{t.date} {t.time}</div>
               </div>
-              <span className={`font-mono text-xs font-bold px-1 border-2 border-black dark:border-neo-yellow shrink-0 ${
-                t.status === 'done' ? 'bg-neo-cyan' : t.status === 'running' ? 'bg-neo-yellow' : 'bg-neo-pink'
+              <span className={`font-mono text-xs font-bold px-2 py-0.5 rounded-full border shrink-0 ${
+                t.status === 'done' ? 'bg-neo-cyan/20 text-neo-cyan border-neo-cyan/30' : t.status === 'running' ? 'bg-neo-yellow/20 text-amber-600 dark:text-neo-yellow border-neo-yellow/30' : 'bg-neo-pink/20 text-neo-pink border-neo-pink/30'
               }`}>
                 {t.status === 'done' ? '완료' : t.status === 'running' ? '진행중' : t.status}
               </span>

@@ -15,8 +15,8 @@ export default function ClockWidget() {
   const date = now.toLocaleDateString('ko-KR', { weekday: 'short', year: 'numeric', month: 'long', day: 'numeric', timeZone: 'Asia/Seoul' });
 
   return (
-    <NeoCard accent="bg-neo-yellow">
-      <h3 className="font-mono text-xs font-bold uppercase mb-2 text-zinc-500 dark:text-zinc-400">🕐 시계</h3>
+    <NeoCard>
+      <h3 className="font-mono text-xs font-bold mb-2 text-zinc-500 dark:text-zinc-400">🕐 시계</h3>
       <div className="font-mono text-5xl font-black tracking-tight">{time}</div>
       <div className="font-mono text-sm mt-2 text-zinc-600 dark:text-zinc-400">{date}</div>
     </NeoCard>

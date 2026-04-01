@@ -11,11 +11,11 @@ interface SecurityItem {
 
 export default function SecurityWidget() {
   return (
-    <NeoCard accent="bg-neo-red" span="md">
-      <h3 className="font-mono text-xs font-bold uppercase mb-3 opacity-60">🛡 보안 원칙</h3>
+    <NeoCard span="md">
+      <h3 className="font-mono text-xs font-bold mb-3 opacity-60">🛡 보안 원칙</h3>
       <div className="space-y-2">
         {(securityData as SecurityItem[]).map((item, i) => (
-          <div key={i} className="border-2 border-red-400 dark:border-red-500 p-2">
+          <div key={i} className="rounded-xl border border-red-200/50 dark:border-red-500/20 bg-red-50/30 dark:bg-red-900/10 p-2.5">
             <div className="flex items-center gap-2">
               <span className="text-sm">{item.emoji}</span>
               <span className="text-xs font-bold">{item.title}</span>

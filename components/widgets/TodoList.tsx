@@ -68,7 +68,7 @@ export default function TodoList() {
           onChange={e => setInput(e.target.value)}
           onKeyDown={e => e.key === 'Enter' && add()}
           placeholder="새 할 일..."
-          className="flex-1 p-1 border-4 border-black dark:border-neo-yellow bg-transparent text-sm focus:outline-none focus:border-neo-pink"
+          className="flex-1 p-1 rounded-xl border border-gray-200 dark:border-zinc-700 bg-transparent text-sm focus:outline-none focus:ring-2 focus:ring-neo-pink/30"
         />
         <NeoButton variant="primary" onClick={add}>+</NeoButton>
       </div>

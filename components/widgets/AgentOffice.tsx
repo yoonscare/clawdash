@@ -1152,9 +1152,9 @@ export default function AgentOffice() {
   };
 
   return (
-    <NeoCard accent="bg-neo-purple" span="md">
+    <NeoCard span="md">
       <div className="flex items-center justify-between mb-3">
-        <h3 className="font-mono text-xs font-bold uppercase opacity-60">
+        <h3 className="font-mono text-xs font-bold opacity-60">
           🏢 에이전트 오피스
         </h3>
         <button
@@ -1162,11 +1162,11 @@ export default function AgentOffice() {
           disabled={meeting}
           className={`
             font-mono text-[10px] font-bold px-3 py-1
-            border-2 border-black dark:border-neo-yellow
+            border border-black/5 dark:border-white/5 rounded-full
             transition-all duration-150
             ${meeting
               ? 'bg-zinc-300 dark:bg-zinc-700 opacity-50 cursor-not-allowed'
-              : 'bg-neo-purple text-white hover:translate-x-[-1px] hover:translate-y-[-1px] active:translate-x-[1px] active:translate-y-[1px] cursor-pointer'
+              : 'bg-neo-purple text-white hover:translate-y-[-1px] cursor-pointer'
             }
           `}
         >
@@ -1177,7 +1177,7 @@ export default function AgentOffice() {
       {/* Canvas */}
       <div
         ref={containerRef}
-        className="border-4 border-black dark:border-neo-yellow overflow-hidden mb-3"
+        className="rounded-2xl border-2 border-black/10 dark:border-white/10 overflow-hidden mb-3"
         style={{ imageRendering: 'pixelated' }}
       >
         <canvas
@@ -1197,7 +1197,7 @@ export default function AgentOffice() {
           return (
             <div
               key={p.name}
-              className={`border-4 border-black dark:border-neo-yellow p-3 ${p.bg}`}
+              className={`rounded-xl border border-black/5 dark:border-white/5 p-3 ${p.bg}`}
             >
               <div className="flex items-center gap-2 mb-2">
                 <CharacterAvatar id={p.charId} size={64} />
@@ -1212,7 +1212,7 @@ export default function AgentOffice() {
                 {p.keywords.map((kw) => (
                   <span
                     key={kw}
-                    className="font-mono text-[9px] px-1.5 py-0.5 border-2 border-black dark:border-neo-yellow bg-white/40 dark:bg-black/30"
+                    className="font-mono text-[9px] px-1.5 py-0.5 rounded-full border border-black/5 dark:border-white/5 bg-white/40 dark:bg-black/30"
                   >
                     {kw}
                   </span>
@@ -1228,7 +1228,7 @@ export default function AgentOffice() {
         {agents.map((agent) => (
           <div
             key={agent.id}
-            className="border-2 border-black dark:border-neo-yellow p-2 bg-zinc-50 dark:bg-zinc-800"
+            className="rounded-xl border border-black/5 dark:border-white/5 p-2 bg-zinc-50 dark:bg-zinc-800"
           >
             <div className="flex items-center gap-1.5 mb-1">
               <div className={`w-2 h-2 rounded-full ${statusColor(agent.status)}`} />

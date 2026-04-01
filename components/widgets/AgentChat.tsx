@@ -53,13 +53,13 @@ export default function AgentChat() {
   }, [messages]);
 
   return (
-    <NeoCard accent="bg-neo-green" span="full">
+    <NeoCard span="full">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
-          <h3 className="font-mono text-sm font-bold uppercase opacity-80">
+          <h3 className="font-mono text-sm font-bold opacity-80">
             💬 클로패밀리 대화
           </h3>
-          <span className="font-mono text-[10px] px-2 py-0.5 border-2 border-black dark:border-neo-yellow bg-neo-green/30 font-bold">
+          <span className="font-mono text-[10px] px-2.5 py-0.5 rounded-full bg-neo-green/20 text-neo-green border border-neo-green/30 font-bold animate-pulse">
             LIVE
           </span>
         </div>
@@ -119,7 +119,7 @@ export default function AgentChat() {
                       {msg.time}
                     </span>
                   </div>
-                  <div className={`p-3 border-l-4 border-2 border-black dark:border-zinc-700 ${bubbleColor}`}>
+                  <div className={`p-3 border-l-4 rounded-xl border border-black/5 dark:border-white/5 ${bubbleColor}`}>
                     <div className="text-sm leading-relaxed break-words">{msg.text}</div>
                   </div>
                 </div>

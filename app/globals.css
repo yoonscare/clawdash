@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 @theme {
-  --color-neo-bg: #FFFEF2;
-  --color-neo-bg-dark: #0A0A0A;
+  --color-neo-bg: #FFF8F0;
+  --color-neo-bg-dark: #1A1520;
   --color-neo-yellow: #FFE66D;
   --color-neo-pink: #FF6B9D;
   --color-neo-cyan: #4ECDC4;
@@ -34,27 +34,27 @@ h1, h2, h3, h4, h5, h6,
 }
 
 .neo-shadow {
-  box-shadow: 8px 8px 0 #000;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
 }
 
 .neo-shadow-sm {
-  box-shadow: 4px 4px 0 #000;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
 }
 
 .neo-shadow-hover {
-  box-shadow: 12px 12px 0 #000;
-  transform: translate(-2px, -2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  transform: translateY(-2px);
 }
 
 .dark .neo-shadow {
-  box-shadow: 8px 8px 0 #FFE66D;
+  box-shadow: 0 4px 16px rgba(255,230,109,0.08);
 }
 
 .dark .neo-shadow-sm {
-  box-shadow: 4px 4px 0 #FFE66D;
+  box-shadow: 0 2px 8px rgba(255,230,109,0.06);
 }
 
 .dark .neo-shadow-hover {
-  box-shadow: 12px 12px 0 #FFE66D;
-  transform: translate(-2px, -2px);
+  box-shadow: 0 8px 24px rgba(255,230,109,0.1);
+  transform: translateY(-2px);
 }

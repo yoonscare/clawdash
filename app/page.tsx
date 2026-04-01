@@ -2,10 +2,8 @@ import Header from '@/components/layout/Header';
 import ClockWidget from '@/components/widgets/ClockWidget';
 import WeatherCard from '@/components/widgets/WeatherCard';
 import AgentOffice from '@/components/widgets/AgentOffice';
-import QuickNote from '@/components/widgets/QuickNote';
 import ChatLog from '@/components/widgets/ChatLog';
 import MissionTracker from '@/components/widgets/MissionTracker';
-import TodoList from '@/components/widgets/TodoList';
 import HealthTracker from '@/components/widgets/HealthTracker';
 import TaskTracker from '@/components/widgets/TaskTracker';
 import AgentChat from '@/components/widgets/AgentChat';
@@ -17,9 +15,9 @@ export default function Home() {
   return (
     <main className="max-w-[1600px] mx-auto">
       <Header />
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-3 p-3">
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 p-4">
         {/* Row 1: Clock+Weather (1col) + AgentOffice (3col) */}
-        <div className="lg:col-span-1 flex flex-col gap-3">
+        <div className="lg:col-span-1 flex flex-col gap-4">
           <ClockWidget />
           <WeatherCard />
         </div>
@@ -27,15 +25,12 @@ export default function Home() {
           <AgentOffice />
         </div>
 
-        {/* Row 2: AgentChat - 에이전트 대화 (전체 너비) */}
+        {/* Row 2: AgentChat (full width) */}
         <div className="lg:col-span-4">
           <AgentChat />
         </div>
 
-        {/* Row 3: TodoList (1col) + ChatLog (1col) + MissionTracker (1col) + TaskTracker (1col) */}
-        <div className="lg:col-span-1">
-          <TodoList />
-        </div>
+        {/* Row 3: ChatLog + MissionTracker + TaskTracker + HealthTracker */}
         <div className="lg:col-span-1">
           <ChatLog />
         </div>
@@ -45,18 +40,15 @@ export default function Home() {
         <div className="lg:col-span-1">
           <TaskTracker />
         </div>
-
-        {/* Row 4: QuickNote (1col) + HealthTracker (1col) + AutoresearchWidget (1col) + SecurityWidget (1col) */}
-        <div className="lg:col-span-1">
-          <QuickNote />
-        </div>
         <div className="lg:col-span-1">
           <HealthTracker />
         </div>
-        <div className="lg:col-span-1">
+
+        {/* Row 4: AutoresearchWidget + SecurityWidget */}
+        <div className="lg:col-span-2">
           <AutoresearchWidget />
         </div>
-        <div className="lg:col-span-1">
+        <div className="lg:col-span-2">
           <SecurityWidget />
         </div>
 

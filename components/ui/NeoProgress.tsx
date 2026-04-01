@@ -11,10 +11,10 @@ export default function NeoProgress({ value, max = 100, color = 'bg-neo-cyan', l
   const percent = Math.min((value / max) * 100, 100);
   return (
     <div className="w-full">
-      {label && <span className="font-mono text-xs font-bold uppercase mb-1 block">{label}</span>}
-      <div className="w-full h-6 border-4 border-black dark:border-neo-yellow bg-white dark:bg-zinc-800">
+      {label && <span className="font-mono text-xs font-bold mb-1 block">{label}</span>}
+      <div className="w-full h-4 rounded-full border border-black/10 dark:border-white/10 bg-gray-100 dark:bg-zinc-800 overflow-hidden">
         <div
-          className={`h-full ${color} transition-all duration-500`}
+          className={`h-full rounded-full ${color} transition-all duration-500`}
           style={{ width: `${percent}%` }}
         />
       </div>
