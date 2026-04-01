@@ -1,6 +1,6 @@
 {
   "version": "3.0",
-  "lastUpdated": "2026-04-01T04:13:04.123Z",
+  "lastUpdated": "2026-04-01T04:39:39.106Z",
   "activeFeatures": [
     "cron",
     "digest",
@@ -10,7 +10,8 @@
     "agent-chat",
     "chatlog",
     "docs",
-    "agent-office"
+    "agent-office",
+    "ui"
   ],
   "primaryFeature": "cron",
   "features": {
@@ -83,9 +84,9 @@
       "documents": {},
       "timestamps": {
         "started": "2026-03-09T01:58:06.128Z",
-        "lastUpdated": "2026-04-01T04:13:04.122Z"
+        "lastUpdated": "2026-04-01T04:39:39.106Z"
       },
-      "lastFile": "C:\\Users\\김기훈.LAPTOP-1R73PMSJ\\Projects\\clawdash\\components\\widgets\\AgentChat.tsx",
+      "lastFile": "C:\\Users\\김기훈.LAPTOP-1R73PMSJ\\Projects\\clawdash\\components\\widgets\\AgentOffice.tsx",
       "stateMachine": {
         "currentState": "do",
         "previousState": null,
@@ -283,6 +284,19 @@
       },
       "phaseTimestamps": {},
       "automationLevel": 2
+    },
+    "ui": {
+      "phase": "do",
+      "phaseNumber": 3,
+      "matchRate": null,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {},
+      "timestamps": {
+        "started": "2026-04-01T04:36:08.990Z",
+        "lastUpdated": "2026-04-01T04:36:08.991Z"
+      },
+      "lastFile": "C:\\Users\\김기훈.LAPTOP-1R73PMSJ\\Projects\\clawdash\\components\\ui\\CharacterAvatar.tsx"
     }
   },
   "pipeline": {
@@ -293,7 +307,7 @@
   "session": {
     "startedAt": "2026-03-09T01:55:06.166Z",
     "onboardingCompleted": false,
-    "lastActivity": "2026-04-01T04:13:04.123Z"
+    "lastActivity": "2026-04-01T04:39:39.106Z"
   },
   "history": [
     {
@@ -532,6 +546,84 @@
     },
     {
       "timestamp": "2026-04-01T04:13:04.122Z",
+      "feature": "widgets",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-01T04:36:08.991Z",
+      "feature": "ui",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-01T04:36:17.221Z",
+      "feature": "widgets",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-01T04:36:23.036Z",
+      "feature": "widgets",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-01T04:37:01.600Z",
+      "feature": "widgets",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-01T04:37:22.755Z",
+      "feature": "widgets",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-01T04:37:33.545Z",
+      "feature": "widgets",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-01T04:37:40.637Z",
+      "feature": "widgets",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-01T04:37:51.232Z",
+      "feature": "widgets",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-01T04:37:58.495Z",
+      "feature": "widgets",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-01T04:38:16.008Z",
+      "feature": "widgets",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-01T04:38:39.586Z",
+      "feature": "widgets",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-01T04:38:47.363Z",
+      "feature": "widgets",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-01T04:39:39.106Z",
       "feature": "widgets",
       "phase": "do",
       "action": "updated"

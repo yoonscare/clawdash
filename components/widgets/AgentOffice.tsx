@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
 import NeoCard from '@/components/ui/NeoCard';
 import NeoBadge from '@/components/ui/NeoBadge';
+import CharacterAvatar from '@/components/ui/CharacterAvatar';
 
 // ─── Types ──────────────────────────────────────────────
 
@@ -57,6 +58,7 @@ const PROFILES = [
   {
     name: '클로',
     emoji: '🦦',
+    charId: 'claw' as const,
     role: '메인 비서 / 오케스트레이터',
     intro: '흐름을 읽고 도구를 골라 일을 굴리는 수달 비서',
     keywords: ['차분함', '유연함', '실용적'],
@@ -65,6 +67,7 @@ const PROFILES = [
   {
     name: '클로아우',
     emoji: '🐾',
+    charId: 'clawau' as const,
     role: '간호교육 전문 브레인 / 문서 감수',
     intro: '기준과 맥락을 지키며 문서와 내용을 단단하게 만드는 곰 브레인',
     keywords: ['든든함', '성실함', '꼼꼼함'],
@@ -73,6 +76,7 @@ const PROFILES = [
   {
     name: '클로비',
     emoji: '🦫',
+    charId: 'clovi' as const,
     role: '빌더 / 시스템 메이커',
     intro: '구조를 짓고 자동화를 엮고 결과물이 남게 만드는 비버 빌더',
     keywords: ['뚝심', '제작자기질', '공학적사고'],
@@ -82,12 +86,70 @@ const PROFILES = [
 
 // ─── Pixel Art Drawing ──────────────────────────────────
 
-function drawOtter(ctx: CanvasRenderingContext2D, x: number, y: number, frame: number, dir: 'left' | 'right', bob: number) {
-  const flip = dir === 'left' ? -1 : 1;
-  ctx.save();
-  ctx.translate(x + CHAR_W / 2, y + Math.sin(bob) * 2.5);
-  ctx.scale(flip, 1);
+type DrawBodyFn = (ctx: CanvasRenderingContext2D, frame: number) => void;
 
+// Offscreen canvas for character outline rendering
+const _offCanvas = typeof document !== 'undefined' ? document.createElement('canvas') : null;
+if (_offCanvas) {
+  _offCanvas.width = CHAR_W * 4;
+  _offCanvas.height = CHAR_H * 4;
+}
+
+function drawWithOutline(
+  ctx: CanvasRenderingContext2D,
+  x: number, y: number,
+  frame: number,
+  dir: 'left' | 'right',
+  bob: number,
+  drawBody: DrawBodyFn,
+) {
+  const flip = dir === 'left' ? -1 : 1;
+  const tx = x + CHAR_W / 2;
+  const ty = y + Math.sin(bob) * 2.5;
+  const cw = CHAR_W * 4;
+  const ch = CHAR_H * 4;
+  const cx = cw / 2;
+  const cy = ch / 2;
+
+  // Draw character to offscreen canvas, then make it all white for outline
+  if (_offCanvas) {
+    const offCtx = _offCanvas.getContext('2d')!;
+    offCtx.clearRect(0, 0, cw, ch);
+    offCtx.imageSmoothingEnabled = false;
+    offCtx.save();
+    offCtx.translate(cx, cy);
+    offCtx.scale(flip, 1);
+    drawBody(offCtx, frame);
+    offCtx.restore();
+
+    // Turn all drawn pixels white
+    offCtx.globalCompositeOperation = 'source-in';
+    offCtx.fillStyle = '#FFFFFF';
+    offCtx.fillRect(0, 0, cw, ch);
+    offCtx.globalCompositeOperation = 'source-over';
+
+    // Stamp white silhouette at 4 offsets
+    const offsets = [[1,0],[-1,0],[0,1],[0,-1]];
+    for (const [ox, oy] of offsets) {
+      ctx.drawImage(_offCanvas, tx - cx + ox, ty - cy + oy);
+    }
+  }
+
+  // Normal draw on top
+  ctx.save();
+  ctx.translate(tx, ty);
+  ctx.scale(flip, 1);
+  drawBody(ctx, frame);
+  ctx.restore();
+}
+
+function drawOtter(ctx: CanvasRenderingContext2D, x: number, y: number, frame: number, dir: 'left' | 'right', bob: number) {
+  drawWithOutline(ctx, x, y, frame, dir, bob, (c, f) => {
+    drawOtterBody(c, f);
+  });
+}
+
+function drawOtterBody(ctx: CanvasRenderingContext2D, frame: number) {
   // Body (teal)
   ctx.fillStyle = '#2DD4BF';
   ctx.fillRect(-14, 4, 28, 28);
@@ -138,16 +200,15 @@ function drawOtter(ctx: CanvasRenderingContext2D, x: number, y: number, frame: n
   ctx.fillStyle = '#14B8A6';
   ctx.fillRect(-10, 32 + (frame % 2 === 0 ? legOffset : 0), 8, 6);
   ctx.fillRect(2, 32 + (frame % 2 === 0 ? 0 : legOffset), 8, 6);
-
-  ctx.restore();
 }
 
 function drawBear(ctx: CanvasRenderingContext2D, x: number, y: number, frame: number, dir: 'left' | 'right', bob: number) {
-  const flip = dir === 'left' ? -1 : 1;
-  ctx.save();
-  ctx.translate(x + CHAR_W / 2, y + Math.sin(bob) * 2.5);
-  ctx.scale(flip, 1);
+  drawWithOutline(ctx, x, y, frame, dir, bob, (c, f) => {
+    drawBearBody(c, f);
+  });
+}
 
+function drawBearBody(ctx: CanvasRenderingContext2D, frame: number) {
   // Body (brown/orange)
   ctx.fillStyle = '#D97706';
   ctx.fillRect(-16, 4, 32, 32);
@@ -197,16 +258,15 @@ function drawBear(ctx: CanvasRenderingContext2D, x: number, y: number, frame: nu
   ctx.fillStyle = '#92400E';
   ctx.fillRect(-12, 36 + (frame % 2 === 0 ? legOffset : 0), 10, 6);
   ctx.fillRect(2, 36 + (frame % 2 === 0 ? 0 : legOffset), 10, 6);
-
-  ctx.restore();
 }
 
 function drawBeaver(ctx: CanvasRenderingContext2D, x: number, y: number, frame: number, dir: 'left' | 'right', bob: number) {
-  const flip = dir === 'left' ? -1 : 1;
-  ctx.save();
-  ctx.translate(x + CHAR_W / 2, y + Math.sin(bob) * 2.5);
-  ctx.scale(flip, 1);
+  drawWithOutline(ctx, x, y, frame, dir, bob, (c, f) => {
+    drawBeaverBody(c, f);
+  });
+}
 
+function drawBeaverBody(ctx: CanvasRenderingContext2D, frame: number) {
   // Body (warm brown)
   ctx.fillStyle = '#92400E';
   ctx.fillRect(-14, 4, 28, 30);
@@ -261,8 +321,6 @@ function drawBeaver(ctx: CanvasRenderingContext2D, x: number, y: number, frame: 
   ctx.fillStyle = '#78350F';
   ctx.fillRect(-10, 34 + (frame % 2 === 0 ? legOffset : 0), 8, 6);
   ctx.fillRect(2, 34 + (frame % 2 === 0 ? 0 : legOffset), 8, 6);
-
-  ctx.restore();
 }
 
 function drawBubble(ctx: CanvasRenderingContext2D, x: number, y: number, text: string) {
@@ -315,14 +373,14 @@ function drawOffice(ctx: CanvasRenderingContext2D, w: number, h: number) {
   for (let ty = 80; ty < h; ty += 20) {
     const isEvenRow = ((ty - 80) / 20) % 2 === 0;
     for (let tx = isEvenRow ? 0 : -50; tx < w + 50; tx += 100) {
-      ctx.fillStyle = (tx + ty) % 40 === 0 ? '#8B6914' : '#7A5C12';
+      ctx.fillStyle = (tx + ty) % 40 === 0 ? '#2A1F0A' : '#251B08';
       ctx.fillRect(tx, ty, 96, 16);
-      ctx.fillStyle = '#5C4510';
+      ctx.fillStyle = '#1E1506';
       ctx.fillRect(tx, ty + 16, 96, 4);
       ctx.fillRect(tx + 96, ty, 4, 20);
     }
     if (ty % 40 === 0) {
-      ctx.fillStyle = 'rgba(139,105,20,0.15)';
+      ctx.fillStyle = 'rgba(30,21,6,0.15)';
       ctx.fillRect(0, ty + 6, w, 2);
     }
   }
@@ -1141,8 +1199,8 @@ export default function AgentOffice() {
               key={p.name}
               className={`border-4 border-black dark:border-neo-yellow p-3 ${p.bg}`}
             >
-              <div className="flex items-center gap-1.5 mb-1">
-                <span className="text-lg">{p.emoji}</span>
+              <div className="flex items-center gap-2 mb-2">
+                <CharacterAvatar id={p.charId} size={64} />
                 <span className="font-mono text-xs font-bold">{p.name}</span>
                 <NeoBadge variant={statusBadge(status)}>
                   {statusLabel(status)}
