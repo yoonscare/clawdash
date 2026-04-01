@@ -30,7 +30,12 @@ export default function Home() {
           <AgentChat />
         </div>
 
-        {/* Row 3: ChatLog + MissionTracker + TaskTracker + HealthTracker */}
+        {/* Row 3: RoleDashboard (full width) */}
+        <div className="lg:col-span-4">
+          <RoleDashboard />
+        </div>
+
+        {/* Row 4: ChatLog + MissionTracker + TaskTracker + HealthTracker */}
         <div className="lg:col-span-1">
           <ChatLog />
         </div>
@@ -44,17 +49,12 @@ export default function Home() {
           <HealthTracker />
         </div>
 
-        {/* Row 4: AutoresearchWidget + SecurityWidget */}
+        {/* Row 5: AutoresearchWidget + SecurityWidget */}
         <div className="lg:col-span-2">
           <AutoresearchWidget />
         </div>
         <div className="lg:col-span-2">
           <SecurityWidget />
-        </div>
-
-        {/* Row 5: RoleDashboard (full width) */}
-        <div className="lg:col-span-4">
-          <RoleDashboard />
         </div>
       </div>
     </main>
