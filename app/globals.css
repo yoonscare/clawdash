@@ -34,11 +34,11 @@ h1, h2, h3, h4, h5, h6,
 }
 
 .neo-shadow {
-  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
 }
 
 .neo-shadow-sm {
-  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
 .neo-shadow-hover {

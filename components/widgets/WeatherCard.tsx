@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import NeoCard from '@/components/ui/NeoCard';
 
 interface WeatherData {
   temp: string;
@@ -35,33 +34,25 @@ export default function WeatherCard() {
   }, []);
 
   return (
-    <NeoCard>
-      <h3 className="font-mono text-xs font-bold mb-2 opacity-60">🌤 서울 날씨</h3>
+    <div className="rounded-xl border border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-4 py-2.5 flex items-center gap-3">
       {weather ? (
         <>
-          <div className="flex items-center gap-3">
-            <span className="text-4xl">{weather.icon}</span>
-            <div>
-              <div className="font-mono text-3xl font-extrabold">{weather.temp}°C</div>
-              <div className="text-sm opacity-70">{weather.condition}</div>
-            </div>
-          </div>
-          <div className="flex gap-4 text-xs mt-2 opacity-50">
-            <span>체감 {weather.feelsLike}°C</span>
-            <span>습도 {weather.humidity}%</span>
-          </div>
+          <span className="text-lg">{weather.icon}</span>
+          <span className="font-mono text-2xl font-black">{weather.temp}°C</span>
+          <span className="text-sm text-zinc-600 dark:text-zinc-400">{weather.condition}</span>
+          <span className="text-xs text-zinc-400">체감 {weather.feelsLike}°C · 습도 {weather.humidity}%</span>
         </>
       ) : (
-        <div className="h-20 flex items-center justify-center font-mono text-sm animate-pulse">로딩 중...</div>
+        <span className="font-mono text-sm animate-pulse">날씨 로딩 중...</span>
       )}
-    </NeoCard>
+    </div>
   );
 }
 
 function translateCondition(en: string): string {
   const map: Record<string, string> = {
     'Clear': '맑음', 'Sunny': '맑음', 'Partly cloudy': '구름 조금',
-    'Cloudy': '흐림', 'Overcast': '흐림', 'Mist': '안개',
+    'Cloudy': '흐림', 'Overcast': '흐림', 'Mist': '안개', 'Haze': '연무',
     'Rain': '비', 'Light rain': '약한 비', 'Heavy rain': '폭우',
     'Snow': '눈', 'Light snow': '약한 눈', 'Thunderstorm': '뇌우',
     'Fog': '안개', 'Drizzle': '이슬비', 'Patchy rain possible': '비 가능성',

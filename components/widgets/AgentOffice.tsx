@@ -137,15 +137,15 @@ export default function AgentOffice() {
               className={`
                 relative rounded-2xl border-2 ${profile.borderColor}
                 bg-gradient-to-br ${profile.gradient}
-                p-5 transition-all duration-300
+                p-4 transition-all duration-300
                 hover:shadow-lg hover:-translate-y-1
                 ${agent.status === 'online' ? `shadow-md ${profile.statusGlow}` : ''}
               `}
             >
               {/* Header: Avatar + Name + Status */}
-              <div className="flex items-center gap-3 mb-4">
+              <div className="flex items-center gap-3 mb-3">
                 <div className="relative">
-                  <CharacterAvatar id={profile.charId} size={56} />
+                  <CharacterAvatar id={profile.charId} size={48} />
                   <div className={`absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 rounded-full ${status.dot} border-2 border-white dark:border-zinc-800 ${status.pulse ? 'animate-pulse' : ''}`} />
                 </div>
                 <div className="flex-1 min-w-0">
@@ -155,34 +155,34 @@ export default function AgentOffice() {
                       {status.label}
                     </span>
                   </div>
-                  <p className="text-xs opacity-50 font-mono">{profile.role}</p>
+                  <p className="text-xs opacity-70 font-mono">{profile.role}</p>
                 </div>
               </div>
 
               {/* Skills Grid */}
-              <div className="mb-3">
-                <p className="text-xs font-mono font-bold opacity-40 mb-1.5 uppercase">할 수 있는 일</p>
-                <div className="grid grid-cols-2 gap-1.5">
+              <div className="mb-2.5">
+                <p className="text-xs font-mono font-bold opacity-50 mb-1 uppercase">할 수 있는 일</p>
+                <div className="grid grid-cols-2 gap-1">
                   {profile.skills.map((skill) => (
                     <div
                       key={skill.label}
-                      className="flex items-center gap-1.5 text-sm py-1.5 px-2.5 rounded-lg bg-white/50 dark:bg-white/5"
+                      className="flex items-center gap-1.5 text-[13px] py-1 px-2 rounded-lg bg-white/60 dark:bg-white/10"
                     >
                       <span>{skill.icon}</span>
-                      <span className="opacity-70">{skill.label}</span>
+                      <span className="opacity-80">{skill.label}</span>
                     </div>
                   ))}
                 </div>
               </div>
 
               {/* Tools */}
-              <div className="mb-3">
-                <p className="text-xs font-mono font-bold opacity-40 mb-1.5 uppercase">사용 도구</p>
-                <div className="flex flex-wrap gap-1.5">
+              <div className="mb-2.5">
+                <p className="text-xs font-mono font-bold opacity-50 mb-1 uppercase">사용 도구</p>
+                <div className="flex flex-wrap gap-1">
                   {profile.tools.map((tool) => (
                     <span
                       key={tool}
-                      className={`text-xs font-mono px-2.5 py-1 rounded-full text-white ${profile.accentColor} opacity-80`}
+                      className={`text-[11px] font-mono px-2 py-0.5 rounded-full text-white ${profile.accentColor}`}
                     >
                       {tool}
                     </span>
@@ -191,10 +191,10 @@ export default function AgentOffice() {
               </div>
 
               {/* Recent Wins */}
-              <div className="mb-3">
-                <p className="text-xs font-mono font-bold opacity-40 mb-1 uppercase">최근 성과</p>
+              <div className="mb-2">
+                <p className="text-xs font-mono font-bold opacity-50 mb-1 uppercase">최근 성과</p>
                 {profile.recentWins.map((win) => (
-                  <div key={win} className="flex items-center gap-1.5 text-sm opacity-60">
+                  <div key={win} className="flex items-center gap-1.5 text-[13px] opacity-75">
                     <span>✅</span>
                     <span>{win}</span>
                   </div>
@@ -213,7 +213,7 @@ export default function AgentOffice() {
               </div>
 
               {/* Signature */}
-              <div className="mt-3 text-sm italic opacity-35 text-center">
+              <div className="mt-2 text-xs italic opacity-40 text-center">
                 &ldquo;{profile.signature}&rdquo;
               </div>
             </div>

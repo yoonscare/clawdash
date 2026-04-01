@@ -16,11 +16,9 @@ export default function Home() {
     <main className="max-w-[1600px] mx-auto">
       <Header />
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 p-4">
-        {/* Row 1: Clock + Weather (compact, side by side) */}
-        <div className="lg:col-span-2">
+        {/* Row 1: Clock + Weather (inline bar) + AgentOffice */}
+        <div className="lg:col-span-4 flex flex-wrap gap-3">
           <ClockWidget />
-        </div>
-        <div className="lg:col-span-2">
           <WeatherCard />
         </div>
 
