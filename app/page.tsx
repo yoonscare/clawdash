@@ -16,12 +16,16 @@ export default function Home() {
     <main className="max-w-[1600px] mx-auto">
       <Header />
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 p-4">
-        {/* Row 1: Clock+Weather (1col) + AgentOffice (3col) */}
-        <div className="lg:col-span-1 flex flex-col gap-4">
+        {/* Row 1: Clock + Weather (compact, side by side) */}
+        <div className="lg:col-span-2">
           <ClockWidget />
+        </div>
+        <div className="lg:col-span-2">
           <WeatherCard />
         </div>
-        <div className="lg:col-span-3">
+
+        {/* Row 2: AgentOffice (full width) */}
+        <div className="lg:col-span-4">
           <AgentOffice />
         </div>
 
