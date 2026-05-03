@@ -2,8 +2,15 @@
 
 import { useMemo, useState } from 'react';
 import NeoCard from '@/components/ui/NeoCard';
+import CharacterAvatar from '@/components/ui/CharacterAvatar';
 
 type AgentId = 'claw' | 'clawau' | 'clawbi';
+
+const agentAvatarIdMap: Record<AgentId, 'claw' | 'clawau' | 'clovi'> = {
+  claw: 'claw',
+  clawau: 'clawau',
+  clawbi: 'clovi',
+};
 
 interface Message {
   id: string;
@@ -175,7 +182,7 @@ export default function CollaborationBoard() {
 
   return (
     <div className="space-y-4 p-4">
-      <div className="flex flex-col gap-3 rounded-2xl border border-black/10 bg-white p-5 dark:border-white/10 dark:bg-zinc-900/80 md:flex-row md:items-center md:justify-between">
+      <div className="flex flex-col gap-3 rounded-[28px] border border-black/8 bg-gradient-to-br from-white to-zinc-50 p-5 shadow-sm dark:border-white/10 dark:from-zinc-900 dark:to-zinc-950/90 md:flex-row md:items-center md:justify-between">
         <div>
           <h2 className="text-2xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">협업 대화가 먼저 보이는 ClawDash</h2>
           <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">작업 목록 / 실제 협업 대화 / 결과물 링크만 남긴 심플 MVP 구조</p>
@@ -203,7 +210,7 @@ export default function CollaborationBoard() {
                 key={thread.id}
                 type="button"
                 onClick={() => setSelectedThreadId(thread.id)}
-                className={`w-full rounded-2xl border p-3 text-left transition ${thread.id === selectedThreadId ? 'border-teal-300 bg-teal-50 dark:border-teal-800 dark:bg-teal-950/20' : 'border-black/5 bg-white hover:border-teal-200 dark:border-white/10 dark:bg-zinc-900/50'}`}
+                className={`w-full rounded-[22px] border p-3 text-left transition ${thread.id === selectedThreadId ? 'border-teal-300 bg-gradient-to-br from-teal-50 to-white shadow-sm dark:border-teal-800 dark:from-teal-950/20 dark:to-zinc-900' : 'border-black/5 bg-white hover:border-teal-200 hover:shadow-sm dark:border-white/10 dark:bg-zinc-900/50'}`}
               >
                 <div className="flex items-start justify-between gap-3">
                   <div>
@@ -230,9 +237,12 @@ export default function CollaborationBoard() {
             {visibleMessages.map((message) => {
               const meta = AGENTS[message.agent];
               return (
-                <article key={message.id} className={`rounded-2xl border p-4 ${meta.bubble}`}>
+                <article key={message.id} className={`rounded-[24px] border p-4 shadow-sm ${meta.bubble}`}>
                   <div className="mb-2 flex items-center justify-between gap-3">
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-3">
+                      <div className="rounded-full border border-white/70 bg-white/80 p-1 shadow-sm dark:border-white/10 dark:bg-zinc-900/80">
+                        <CharacterAvatar id={agentAvatarIdMap[message.agent]} size={40} />
+                      </div>
                       <div>
                         <div className="font-semibold text-zinc-900 dark:text-zinc-100">{meta.label}</div>
                         <div className="text-xs text-zinc-500 dark:text-zinc-400">{message.role} · {meta.tone}</div>
@@ -267,7 +277,7 @@ export default function CollaborationBoard() {
               <div className="text-xs font-semibold uppercase tracking-wide text-zinc-400">결과물</div>
               <div className="mt-2 space-y-2">
                 {selectedThread.artifacts.map((artifact) => (
-                  <a key={artifact.name} href={artifact.href} className="block rounded-2xl border border-black/5 bg-white p-3 transition hover:border-teal-200 hover:bg-teal-50/50 dark:border-white/10 dark:bg-zinc-900/60 dark:hover:border-teal-800 dark:hover:bg-teal-950/20">
+                  <a key={artifact.name} href={artifact.href} className="block rounded-[20px] border border-black/5 bg-white p-3 transition hover:border-teal-200 hover:bg-teal-50/50 hover:shadow-sm dark:border-white/10 dark:bg-zinc-900/60 dark:hover:border-teal-800 dark:hover:bg-teal-950/20">
                     <div className="font-medium text-zinc-900 dark:text-zinc-100">{artifact.name}</div>
                     <div className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">{artifact.description}</div>
                   </a>
