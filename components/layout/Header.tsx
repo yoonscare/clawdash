@@ -24,7 +24,6 @@ export default function Header() {
     <header className="p-4 pb-0">
       <div className="flex flex-col gap-3 rounded-2xl border border-black/10 bg-white p-5 dark:border-white/10 dark:bg-zinc-900/80 md:flex-row md:items-center md:justify-between">
         <div className="flex items-center gap-3">
-          <span className="text-4xl">🦦🐻🦫</span>
           <div>
             <h1 className="font-mono text-3xl font-black tracking-tight">
               Claw<span className="text-neo-pink">Dash</span>

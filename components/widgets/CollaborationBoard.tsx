@@ -29,24 +29,21 @@ interface Thread {
   artifacts: Artifact[];
 }
 
-const AGENTS: Record<AgentId, { label: string; emoji: string; tone: string; bubble: string; chip: string }> = {
+const AGENTS: Record<AgentId, { label: string; tone: string; bubble: string; chip: string }> = {
   claw: {
     label: '클로',
-    emoji: '🦦',
     tone: '오케스트레이터',
     bubble: 'bg-teal-50 border-teal-200 dark:bg-teal-950/20 dark:border-teal-800',
     chip: 'text-teal-700 bg-teal-100 dark:text-teal-300 dark:bg-teal-900/40',
   },
   clawau: {
     label: '클로아우',
-    emoji: '🐻',
     tone: '기준·감수',
     bubble: 'bg-amber-50 border-amber-200 dark:bg-amber-950/20 dark:border-amber-800',
     chip: 'text-amber-700 bg-amber-100 dark:text-amber-300 dark:bg-amber-900/40',
   },
   clawbi: {
     label: '클로비',
-    emoji: '🦫',
     tone: '구현·구조',
     bubble: 'bg-orange-50 border-orange-200 dark:bg-orange-950/20 dark:border-orange-800',
     chip: 'text-orange-700 bg-orange-100 dark:text-orange-300 dark:bg-orange-900/40',
@@ -236,7 +233,6 @@ export default function CollaborationBoard() {
                 <article key={message.id} className={`rounded-2xl border p-4 ${meta.bubble}`}>
                   <div className="mb-2 flex items-center justify-between gap-3">
                     <div className="flex items-center gap-2">
-                      <span className="text-xl">{meta.emoji}</span>
                       <div>
                         <div className="font-semibold">{meta.label}</div>
                         <div className="text-xs text-zinc-500 dark:text-zinc-400">{message.role} · {meta.tone}</div>
