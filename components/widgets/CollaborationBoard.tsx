@@ -177,7 +177,7 @@ export default function CollaborationBoard() {
     <div className="space-y-4 p-4">
       <div className="flex flex-col gap-3 rounded-2xl border border-black/10 bg-white p-5 dark:border-white/10 dark:bg-zinc-900/80 md:flex-row md:items-center md:justify-between">
         <div>
-          <h2 className="text-2xl font-bold tracking-tight">협업 대화가 먼저 보이는 ClawDash</h2>
+          <h2 className="text-2xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">협업 대화가 먼저 보이는 ClawDash</h2>
           <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">작업 목록 / 실제 협업 대화 / 결과물 링크만 남긴 심플 MVP 구조</p>
         </div>
         <div className="flex flex-wrap gap-2">
@@ -196,7 +196,7 @@ export default function CollaborationBoard() {
 
       <div className="grid grid-cols-1 gap-4 xl:grid-cols-[280px_minmax(0,1fr)_320px]">
         <NeoCard className="p-0 overflow-hidden">
-          <div className="border-b border-black/5 px-4 py-3 text-sm font-semibold dark:border-white/10">작업 목록</div>
+          <div className="border-b border-black/5 px-4 py-3 text-sm font-semibold text-zinc-900 dark:border-white/10 dark:text-zinc-100">작업 목록</div>
           <div className="space-y-2 p-3">
             {THREADS.map((thread) => (
               <button
@@ -207,7 +207,7 @@ export default function CollaborationBoard() {
               >
                 <div className="flex items-start justify-between gap-3">
                   <div>
-                    <div className="font-semibold">{thread.title}</div>
+                    <div className="font-semibold text-zinc-900 dark:text-zinc-100">{thread.title}</div>
                     <div className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">{thread.summary}</div>
                   </div>
                   <span className="rounded-full bg-zinc-100 px-2 py-1 text-[11px] text-zinc-600 dark:bg-zinc-800 dark:text-zinc-300">{thread.status}</span>
@@ -221,7 +221,7 @@ export default function CollaborationBoard() {
         <NeoCard className="p-0 overflow-hidden">
           <div className="flex items-start justify-between gap-4 border-b border-black/5 px-5 py-4 dark:border-white/10">
             <div>
-              <h3 className="text-lg font-semibold">{selectedThread.title}</h3>
+              <h3 className="text-lg font-semibold text-zinc-900 dark:text-zinc-100">{selectedThread.title}</h3>
               <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">{selectedThread.summary}</p>
             </div>
             <span className="rounded-full bg-zinc-100 px-2.5 py-1 text-xs text-zinc-600 dark:bg-zinc-800 dark:text-zinc-300">{selectedThread.status}</span>
@@ -234,7 +234,7 @@ export default function CollaborationBoard() {
                   <div className="mb-2 flex items-center justify-between gap-3">
                     <div className="flex items-center gap-2">
                       <div>
-                        <div className="font-semibold">{meta.label}</div>
+                        <div className="font-semibold text-zinc-900 dark:text-zinc-100">{meta.label}</div>
                         <div className="text-xs text-zinc-500 dark:text-zinc-400">{message.role} · {meta.tone}</div>
                       </div>
                     </div>
@@ -253,22 +253,22 @@ export default function CollaborationBoard() {
         </NeoCard>
 
         <NeoCard className="p-0 overflow-hidden">
-          <div className="border-b border-black/5 px-4 py-3 text-sm font-semibold dark:border-white/10">결과물 / 링크</div>
+          <div className="border-b border-black/5 px-4 py-3 text-sm font-semibold text-zinc-900 dark:border-white/10 dark:text-zinc-100">결과물 / 링크</div>
           <div className="space-y-4 p-4">
             <div>
               <div className="text-xs font-semibold uppercase tracking-wide text-zinc-400">현재 상태</div>
-              <div className="mt-2 rounded-2xl border border-black/5 bg-zinc-50 p-3 text-sm dark:border-white/10 dark:bg-zinc-950/40">{selectedThread.status}</div>
+              <div className="mt-2 rounded-2xl border border-black/5 bg-zinc-50 p-3 text-sm text-zinc-900 dark:border-white/10 dark:bg-zinc-950/40 dark:text-zinc-100">{selectedThread.status}</div>
             </div>
             <div>
               <div className="text-xs font-semibold uppercase tracking-wide text-zinc-400">최근 요약</div>
-              <div className="mt-2 rounded-2xl border border-black/5 bg-zinc-50 p-3 text-sm leading-6 dark:border-white/10 dark:bg-zinc-950/40">{selectedThread.summary}</div>
+              <div className="mt-2 rounded-2xl border border-black/5 bg-zinc-50 p-3 text-sm leading-6 text-zinc-900 dark:border-white/10 dark:bg-zinc-950/40 dark:text-zinc-100">{selectedThread.summary}</div>
             </div>
             <div>
               <div className="text-xs font-semibold uppercase tracking-wide text-zinc-400">결과물</div>
               <div className="mt-2 space-y-2">
                 {selectedThread.artifacts.map((artifact) => (
                   <a key={artifact.name} href={artifact.href} className="block rounded-2xl border border-black/5 bg-white p-3 transition hover:border-teal-200 hover:bg-teal-50/50 dark:border-white/10 dark:bg-zinc-900/60 dark:hover:border-teal-800 dark:hover:bg-teal-950/20">
-                    <div className="font-medium">{artifact.name}</div>
+                    <div className="font-medium text-zinc-900 dark:text-zinc-100">{artifact.name}</div>
                     <div className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">{artifact.description}</div>
                   </a>
                 ))}
