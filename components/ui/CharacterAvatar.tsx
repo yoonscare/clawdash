@@ -8,9 +8,9 @@ interface CharacterAvatarProps {
 }
 
 const uploadedAvatarMap: Record<'claw' | 'clawau' | 'clovi', string> = {
-  claw: '/characters/claw.png',
-  clawau: '/characters/clawau.png',
-  clovi: '/characters/clovi.png',
+  claw: '/characters/claw.jpg',
+  clawau: '/characters/clawau.jpg',
+  clovi: '/characters/clovi.jpg',
 };
 
 function PlaceholderAvatar({
