@@ -1,7 +1,17 @@
+'use client';
+
+import { useState } from 'react';
+
 interface CharacterAvatarProps {
   id: 'claw' | 'clawau' | 'clovi';
   size?: number;
 }
+
+const uploadedAvatarMap: Record<'claw' | 'clawau' | 'clovi', string> = {
+  claw: '/characters/claw.png',
+  clawau: '/characters/clawau.png',
+  clovi: '/characters/clovi.png',
+};
 
 function ClawSVG({ size }: { size: number }) {
   return (
@@ -113,7 +123,7 @@ function CloviSVG({ size }: { size: number }) {
   );
 }
 
-export default function CharacterAvatar({ id, size = 80 }: CharacterAvatarProps) {
+function FallbackAvatar({ id, size }: { id: 'claw' | 'clawau' | 'clovi'; size: number }) {
   switch (id) {
     case 'claw':
       return <ClawSVG size={size} />;
@@ -122,4 +132,24 @@ export default function CharacterAvatar({ id, size = 80 }: CharacterAvatarProps)
     case 'clovi':
       return <CloviSVG size={size} />;
   }
+}
+
+export default function CharacterAvatar({ id, size = 80 }: CharacterAvatarProps) {
+  const [failed, setFailed] = useState(false);
+  const uploadedSrc = uploadedAvatarMap[id];
+
+  if (!failed) {
+    return (
+      <img
+        src={uploadedSrc}
+        alt={`${id} avatar`}
+        width={size}
+        height={size}
+        style={{ width: size, height: size, borderRadius: '9999px', objectFit: 'cover' }}
+        onError={() => setFailed(true)}
+      />
+    );
+  }
+
+  return <FallbackAvatar id={id} size={size} />;
 }

@@ -20,19 +20,16 @@ export default function Header() {
     localStorage.setItem('clawdash-dark', String(!dark));
   };
 
-  const hour = new Date().getHours();
-  const greeting = hour < 12 ? '좋은 아침이야 ☀️' : hour < 18 ? '오후도 화이팅 💪' : '수고했어 오늘도 🌙';
-
   return (
-    <header className="p-4 mb-4">
-      <div className="flex items-center justify-between mb-3">
+    <header className="p-4 pb-0">
+      <div className="flex flex-col gap-3 rounded-2xl border border-black/10 bg-white p-5 dark:border-white/10 dark:bg-zinc-900/80 md:flex-row md:items-center md:justify-between">
         <div className="flex items-center gap-3">
-          <span className="text-4xl">🐾</span>
+          <span className="text-4xl">🦦🐻🦫</span>
           <div>
             <h1 className="font-mono text-3xl font-black tracking-tight">
               Claw<span className="text-neo-pink">Dash</span>
             </h1>
-            <p className="font-mono text-xs opacity-60">{greeting} 윤스케어!</p>
+            <p className="font-mono text-xs opacity-60">클로 · 클로아우 · 클로비 협업 대화가 먼저 보이는 화면</p>
           </div>
         </div>
         <div className="flex items-center gap-3">
@@ -40,15 +37,6 @@ export default function Header() {
             {dark ? '☀️ Light' : '🌙 Dark'}
           </NeoButton>
         </div>
-      </div>
-      <div className="rounded-2xl bg-neo-yellow/10 dark:bg-neo-yellow/5 border border-neo-yellow/20 p-4">
-        <div className="flex items-center gap-2">
-          <span className="text-lg">🎯</span>
-          <span className="font-mono text-sm font-bold">Mission</span>
-        </div>
-        <p className="text-sm mt-1 opacity-70">
-          &quot;간호교육 현장의 반복 업무를 자동화하고, AI 활용 교육을 통해 간호직의 미래를 앞당긴다&quot;
-        </p>
       </div>
     </header>
   );
