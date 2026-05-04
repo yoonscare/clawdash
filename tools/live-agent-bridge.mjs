@@ -28,7 +28,7 @@ function writeJson(file, value) {
 }
 
 function loadState() {
-  return readJson(STATE_PATH, { sessions: {} });
+  return readJson(STATE_PATH, { sessions: {}, recentFingerprints: [] });
 }
 
 function saveState(state) {
@@ -72,6 +72,12 @@ async function pushMessage(payload) {
   }
 }
 
+function rememberFingerprint(state, fingerprint) {
+  const recent = Array.isArray(state.recentFingerprints) ? state.recentFingerprints : [];
+  recent.push(fingerprint);
+  state.recentFingerprints = recent.slice(-500);
+}
+
 async function syncAgent(agent, state) {
   const sessionFile = getSessionFile(agent);
   if (!sessionFile || !fs.existsSync(sessionFile)) return 0;
@@ -111,13 +117,22 @@ async function syncAgent(agent, state) {
       minute: '2-digit',
     });
 
-    await pushMessage({
+    const payload = {
       time,
       from: role === 'assistant' ? agent.label : '윤 스케어',
       to: role === 'assistant' ? '윤 스케어' : agent.label,
       text,
-    });
+    };
 
+    const fingerprint = `${payload.time}|${payload.from}|${payload.to}|${payload.text}`;
+    if ((state.recentFingerprints || []).includes(fingerprint)) {
+      sessionState.lastId = dedupeKey;
+      continue;
+    }
+
+    await pushMessage(payload);
+
+    rememberFingerprint(state, fingerprint);
     sessionState.lastId = dedupeKey;
     pushed += 1;
   }
