@@ -26,22 +26,13 @@ export default function Header() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(45,212,191,0.16),transparent_28%),radial-gradient(circle_at_bottom_right,rgba(56,189,248,0.12),transparent_22%)]" />
         <div className="relative flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div>
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/70 bg-white/75 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.22em] text-zinc-500 shadow-sm dark:border-white/10 dark:bg-white/[0.04] dark:text-zinc-300">
-              Live workspace
-            </div>
-            <h1 className="mt-3 text-3xl font-semibold tracking-[-0.05em] text-zinc-950 dark:text-white md:text-4xl">
+            <h1 className="text-3xl font-semibold tracking-[-0.05em] text-zinc-950 dark:text-white md:text-4xl">
               Claw<span className="text-teal-500">Dash</span>
             </h1>
-            <p className="mt-2 max-w-2xl text-sm text-zinc-500 dark:text-zinc-400">
-              클로 · 클로아우 · 클로비 협업 흐름을 가장 먼저 읽는 대시보드
-            </p>
+            <p className="mt-2 text-sm text-zinc-500 dark:text-zinc-400">작업 · 대화 · 결과물</p>
           </div>
 
           <div className="flex items-center gap-3">
-            <div className="hidden rounded-2xl border border-white/70 bg-white/70 px-4 py-3 text-right shadow-sm backdrop-blur dark:border-white/10 dark:bg-white/[0.04] md:block">
-              <div className="text-[11px] uppercase tracking-[0.24em] text-zinc-400">View mode</div>
-              <div className="mt-1 text-sm font-medium text-zinc-900 dark:text-zinc-100">Conversation first</div>
-            </div>
             <NeoButton onClick={toggle} variant="secondary" className="rounded-2xl border-white/70 bg-white/75 px-4 dark:border-white/10 dark:bg-white/[0.06] dark:text-white">
               {dark ? '라이트 모드' : '다크 모드'}
             </NeoButton>

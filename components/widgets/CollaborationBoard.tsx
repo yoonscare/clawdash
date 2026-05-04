@@ -186,15 +186,6 @@ const THREADS: Thread[] = [
   },
 ];
 
-function getThreadHighlights(thread: Thread) {
-  const participants = Array.from(new Set(thread.messages.map((message) => message.agent)));
-  return [
-    `참여 에이전트 ${participants.length}명`,
-    `대화 ${thread.messages.length}개`,
-    `결과물 ${thread.artifacts.length}개`,
-  ];
-}
-
 export default function CollaborationBoard() {
   const [selectedThreadId, setSelectedThreadId] = useState<string>(THREADS[0].id);
   const [selectedAgent, setSelectedAgent] = useState<'all' | AgentId>('all');
@@ -207,27 +198,14 @@ export default function CollaborationBoard() {
   }, [selectedAgent, selectedThread]);
 
   const participants = Array.from(new Set(selectedThread.messages.map((message) => message.agent)));
-  const highlights = getThreadHighlights(selectedThread);
 
   return (
     <div className="space-y-5 px-4 pb-6 pt-3">
       <section className="relative overflow-hidden rounded-[32px] border border-white/60 bg-[radial-gradient(circle_at_top_left,_rgba(45,212,191,0.18),_transparent_36%),radial-gradient(circle_at_top_right,_rgba(59,130,246,0.12),_transparent_28%),linear-gradient(135deg,_rgba(255,255,255,0.96),_rgba(244,247,251,0.9))] p-6 shadow-[0_24px_80px_rgba(15,23,42,0.08)] dark:border-white/10 dark:bg-[radial-gradient(circle_at_top_left,_rgba(45,212,191,0.15),_transparent_32%),radial-gradient(circle_at_top_right,_rgba(96,165,250,0.12),_transparent_24%),linear-gradient(135deg,_rgba(24,24,27,0.96),_rgba(9,9,11,0.92))]">
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.18)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.14)_1px,transparent_1px)] bg-[size:22px_22px] opacity-30 dark:opacity-10" />
         <div className="relative flex flex-col gap-5 xl:flex-row xl:items-end xl:justify-between">
-          <div className="max-w-3xl space-y-4">
-            <div className="inline-flex w-fit items-center gap-2 rounded-full border border-white/70 bg-white/80 px-3 py-1 text-xs font-medium text-zinc-600 shadow-sm backdrop-blur dark:border-white/10 dark:bg-white/5 dark:text-zinc-300">
-              <span className="h-2 w-2 rounded-full bg-emerald-400" />
-              협업 로그 중심 리디자인
-            </div>
-            <div>
-              <h2 className="text-3xl font-semibold tracking-[-0.04em] text-zinc-950 dark:text-white md:text-4xl">
-                ClawDash를 더 세련되게,
-                <br className="hidden md:block" /> 오른쪽은 정말 필요한 것만 남겼다.
-              </h2>
-              <p className="mt-3 max-w-2xl text-sm leading-6 text-zinc-600 dark:text-zinc-300 md:text-base">
-                상태판보다 실제 협업 대화가 먼저 읽히고, 오른쪽은 요약과 결과물만 빠르게 확인하는 집중형 레이아웃.
-              </p>
-            </div>
+          <div>
+            <h2 className="text-2xl font-semibold tracking-[-0.04em] text-zinc-950 dark:text-white md:text-3xl">협업 대시보드</h2>
           </div>
 
           <div className="grid gap-3 sm:grid-cols-3 xl:min-w-[420px]">
@@ -261,10 +239,7 @@ export default function CollaborationBoard() {
       <div className="grid grid-cols-1 gap-5 xl:grid-cols-[300px_minmax(0,1fr)_280px]">
         <NeoCard className="overflow-hidden p-0">
           <div className="flex items-center justify-between border-b border-black/5 px-5 py-4 dark:border-white/10">
-            <div>
-              <div className="text-sm font-semibold text-zinc-950 dark:text-white">작업 흐름</div>
-              <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">지금 무엇을 굴리고 있는지 한 번에</p>
-            </div>
+            <div className="text-sm font-semibold text-zinc-950 dark:text-white">작업 흐름</div>
             <span className="rounded-full bg-zinc-100 px-2.5 py-1 text-[11px] text-zinc-500 dark:bg-white/5 dark:text-zinc-300">{THREADS.length}개</span>
           </div>
           <div className="space-y-3 p-3">
@@ -299,7 +274,7 @@ export default function CollaborationBoard() {
                   <h3 className="text-xl font-semibold tracking-[-0.03em] text-zinc-950 dark:text-white">{selectedThread.title}</h3>
                   <span className={`rounded-full px-2.5 py-1 text-[11px] font-medium ${STATUS_TONE[selectedThread.status]}`}>{STATUS_LABEL[selectedThread.status]}</span>
                 </div>
-                <p className="mt-2 max-w-2xl text-sm leading-6 text-zinc-500 dark:text-zinc-400">{selectedThread.focus}</p>
+                <p className="mt-2 text-sm text-zinc-500 dark:text-zinc-400">{selectedThread.updatedAt}</p>
               </div>
               <div className="flex -space-x-2">
                 {participants.map((agent) => (
@@ -346,22 +321,13 @@ export default function CollaborationBoard() {
 
         <NeoCard className="overflow-hidden p-0">
           <div className="border-b border-black/5 px-5 py-4 dark:border-white/10">
-            <div className="text-sm font-semibold text-zinc-950 dark:text-white">핵심만 보기</div>
-            <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">오른쪽은 요약과 결과물만 남겼다.</p>
+            <div className="text-sm font-semibold text-zinc-950 dark:text-white">요약 / 결과물</div>
           </div>
 
           <div className="space-y-4 p-4">
             <div className="rounded-[24px] border border-black/5 bg-zinc-50/80 p-4 dark:border-white/10 dark:bg-white/[0.03]">
-              <div className="text-xs font-semibold uppercase tracking-[0.24em] text-zinc-400">핵심 요약</div>
+              <div className="text-xs font-semibold uppercase tracking-[0.24em] text-zinc-400">요약</div>
               <p className="mt-3 text-sm leading-6 text-zinc-700 dark:text-zinc-200">{selectedThread.focus}</p>
-            </div>
-
-            <div className="space-y-2">
-              {highlights.map((highlight) => (
-                <div key={highlight} className="rounded-2xl border border-black/5 bg-white/80 px-3 py-2 text-sm text-zinc-600 dark:border-white/10 dark:bg-white/[0.03] dark:text-zinc-300">
-                  {highlight}
-                </div>
-              ))}
             </div>
 
             <div>
