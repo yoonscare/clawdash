@@ -1,60 +1,78 @@
 @import "tailwindcss";
 
 @theme {
-  --color-neo-bg: #FFF8F0;
-  --color-neo-bg-dark: #1A1520;
-  --color-neo-yellow: #FFE66D;
-  --color-neo-pink: #FF6B9D;
-  --color-neo-cyan: #4ECDC4;
-  --color-neo-red: #FF4757;
-  --color-neo-purple: #A855F7;
-  --color-neo-blue: #3B82F6;
-  --color-neo-green: #10B981;
-  --color-neo-black: #000000;
-  --color-neo-white: #FFFFFF;
+  --color-neo-bg: #edf2f7;
+  --color-neo-bg-dark: #09090b;
+  --color-neo-yellow: #ffe66d;
+  --color-neo-pink: #ff6b9d;
+  --color-neo-cyan: #dffcf7;
+  --color-neo-red: #ff4757;
+  --color-neo-purple: #a855f7;
+  --color-neo-blue: #3b82f6;
+  --color-neo-green: #10b981;
+  --color-neo-black: #111827;
+  --color-neo-white: #ffffff;
   --font-mono: 'JetBrains Mono', 'Noto Sans KR', monospace;
   --font-sans: 'Inter', 'Noto Sans KR', sans-serif;
 }
 
+html {
+  color-scheme: light;
+}
+
+html.dark {
+  color-scheme: dark;
+}
+
 body {
   font-family: var(--font-sans);
-  background-color: var(--color-neo-bg);
+  background:
+    radial-gradient(circle at top left, rgba(45, 212, 191, 0.16), transparent 24%),
+    radial-gradient(circle at top right, rgba(96, 165, 250, 0.12), transparent 22%),
+    linear-gradient(180deg, #f6f8fb 0%, #eef2f7 100%);
   color: var(--color-neo-black);
 }
 
 .dark body,
 body.dark {
-  background-color: var(--color-neo-bg-dark);
+  background:
+    radial-gradient(circle at top left, rgba(45, 212, 191, 0.14), transparent 24%),
+    radial-gradient(circle at top right, rgba(96, 165, 250, 0.12), transparent 22%),
+    linear-gradient(180deg, #111214 0%, #09090b 100%);
   color: var(--color-neo-white);
 }
 
 h1, h2, h3, h4, h5, h6,
 .font-mono {
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
+}
+
+::selection {
+  background: rgba(20, 184, 166, 0.2);
 }
 
 .neo-shadow {
-  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  box-shadow: 0 20px 60px rgba(15, 23, 42, 0.08);
 }
 
 .neo-shadow-sm {
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
 }
 
 .neo-shadow-hover {
-  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-  transform: translateY(-2px);
+  box-shadow: 0 18px 50px rgba(15, 23, 42, 0.12);
+  transform: translateY(-1px);
 }
 
 .dark .neo-shadow {
-  box-shadow: 0 4px 16px rgba(255,230,109,0.08);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
 }
 
 .dark .neo-shadow-sm {
-  box-shadow: 0 2px 8px rgba(255,230,109,0.06);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.24);
 }
 
 .dark .neo-shadow-hover {
-  box-shadow: 0 8px 24px rgba(255,230,109,0.1);
-  transform: translateY(-2px);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.34);
+  transform: translateY(-1px);
 }

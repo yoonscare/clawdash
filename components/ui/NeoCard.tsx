@@ -20,14 +20,13 @@ export default function NeoCard({ children, className = '', span = 'sm' }: NeoCa
   return (
     <div
       className={`
-        border-2 border-black/10 dark:border-white/10
-        rounded-2xl
-        neo-shadow
-        bg-white dark:bg-zinc-900/80
-        p-5
-        h-full
+        rounded-[28px]
+        border border-white/65 dark:border-white/10
+        bg-white/72 dark:bg-white/[0.03]
+        shadow-[0_20px_60px_rgba(15,23,42,0.08)]
+        backdrop-blur-xl
         transition-all duration-200
-        hover:neo-shadow-hover
+        hover:-translate-y-0.5 hover:shadow-[0_24px_70px_rgba(15,23,42,0.1)]
         ${spanClasses[span]}
         ${className}
       `}
