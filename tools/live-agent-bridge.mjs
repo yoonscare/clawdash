@@ -60,11 +60,28 @@ function sanitizeText(text) {
     .trim();
 }
 
+function getTextItems(content = []) {
+  if (!Array.isArray(content)) return [];
+  return content.filter((item) => item && item.type === 'text' && typeof item.text === 'string');
+}
+
+function shouldIncludeAssistantMessage(content = []) {
+  if (!Array.isArray(content) || content.some((item) => item?.type === 'toolCall' || item?.type === 'thinking')) {
+    return false;
+  }
+
+  const textItems = getTextItems(content);
+  if (!textItems.length) return false;
+
+  return textItems.some((item) => {
+    if (!item.textSignature) return true;
+    return !String(item.textSignature).includes('"phase":"commentary"');
+  });
+}
+
 function extractText(content = []) {
-  if (!Array.isArray(content)) return '';
   return sanitizeText(
-    content
-      .filter((item) => item && item.type === 'text' && typeof item.text === 'string')
+    getTextItems(content)
       .map((item) => item.text.trim())
       .filter(Boolean)
       .join('\n\n')
@@ -120,6 +137,7 @@ async function syncAgent(agent, state) {
 
     const role = row.message.role;
     if (role !== 'user' && role !== 'assistant') continue;
+    if (role === 'assistant' && !shouldIncludeAssistantMessage(row.message.content)) continue;
 
     const text = extractText(row.message.content);
     if (!text) continue;
