@@ -67,6 +67,18 @@ function toAgentId(name: string): AgentId {
   return 'user';
 }
 
+function cleanDisplayText(text: string) {
+  return text
+    .replace(/```[\s\S]*?```/g, '')
+    .replace(/`([^`]+)`/g, '$1')
+    .replace(/\*\*([^*]+)\*\*/g, '$1')
+    .replace(/__([^_]+)__/g, '$1')
+    .replace(/^#{1,6}\s*/gm, '')
+    .replace(/^>\s?/gm, '')
+    .replace(/\n{3,}/g, '\n\n')
+    .trim();
+}
+
 function UserAvatar() {
   return (
     <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[linear-gradient(135deg,#8b5cf6,#d946ef)] text-sm font-semibold text-white">
@@ -205,7 +217,7 @@ export default function CollaborationBoard() {
                     </div>
                     <span className={`rounded-full px-2.5 py-1 text-[11px] font-medium ${meta.chip}`}>{message.time}</span>
                   </div>
-                  <p className="whitespace-pre-wrap text-sm leading-7 text-zinc-700 dark:text-zinc-100">{message.text}</p>
+                  <p className="whitespace-pre-wrap text-sm leading-7 text-zinc-700 dark:text-zinc-100">{cleanDisplayText(message.text)}</p>
                 </article>
               );
             })}
@@ -233,7 +245,7 @@ export default function CollaborationBoard() {
 
             <div className="rounded-[24px] border border-black/5 bg-zinc-50/80 p-4 dark:border-white/10 dark:bg-white/[0.03]">
               <div className="text-xs font-semibold uppercase tracking-[0.24em] text-zinc-400">최근 문장</div>
-              <p className="mt-3 text-sm leading-6 text-zinc-700 dark:text-zinc-200">{lastMessage?.text || '로그가 들어오면 마지막 대화가 여기에 표시됩니다.'}</p>
+              <p className="mt-3 text-sm leading-6 text-zinc-700 dark:text-zinc-200">{lastMessage ? cleanDisplayText(lastMessage.text) : '로그가 들어오면 마지막 대화가 여기에 표시됩니다.'}</p>
             </div>
           </div>
         </NeoCard>

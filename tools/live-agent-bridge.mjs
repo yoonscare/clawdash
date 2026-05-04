@@ -46,14 +46,30 @@ function getSessionFile(agent) {
   return null;
 }
 
+function sanitizeText(text) {
+  return text
+    .replace(/```[\s\S]*?```/g, '')
+    .replace(/`([^`]+)`/g, '$1')
+    .replace(/\*\*([^*]+)\*\*/g, '$1')
+    .replace(/__([^_]+)__/g, '$1')
+    .replace(/^#{1,6}\s*/gm, '')
+    .replace(/^>\s?/gm, '')
+    .replace(/^[-*+]\s+/gm, '')
+    .replace(/^\d+\.\s+/gm, '')
+    .replace(/\n{3,}/g, '\n\n')
+    .trim();
+}
+
 function extractText(content = []) {
   if (!Array.isArray(content)) return '';
-  return content
-    .filter((item) => item && item.type === 'text' && typeof item.text === 'string')
-    .map((item) => item.text.trim())
-    .filter(Boolean)
-    .join('\n\n')
-    .trim();
+  return sanitizeText(
+    content
+      .filter((item) => item && item.type === 'text' && typeof item.text === 'string')
+      .map((item) => item.text.trim())
+      .filter(Boolean)
+      .join('\n\n')
+      .trim()
+  );
 }
 
 async function pushMessage(payload) {
@@ -85,9 +101,9 @@ async function syncAgent(agent, state) {
   const sessionState = state.sessions[agent.key] || {};
   const lines = fs.readFileSync(sessionFile, 'utf8').split('\n').filter(Boolean);
 
-  let startIndex = typeof sessionState.index === 'number' ? sessionState.index : Math.max(0, lines.length - 6);
+  let startIndex = typeof sessionState.index === 'number' ? sessionState.index : lines.length;
   if (sessionState.file !== sessionFile) {
-    startIndex = Math.max(0, lines.length - 6);
+    startIndex = lines.length;
   }
 
   let pushed = 0;
