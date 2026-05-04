@@ -115,13 +115,13 @@ export default function CollaborationBoard() {
   const normalizedMessages = useMemo(() => {
     const seen = new Set<string>();
     return [...messages]
+      .sort((a, b) => (b.id ?? 0) - (a.id ?? 0))
       .filter((message) => {
-        const key = message.id ? String(message.id) : `${message.time}|${message.from}|${message.to}|${message.text}`;
+        const key = `${message.time}|${message.from}|${message.to}|${message.text}`;
         if (seen.has(key)) return false;
         seen.add(key);
         return true;
-      })
-      .sort((a, b) => (b.id ?? 0) - (a.id ?? 0));
+      });
   }, [messages]);
 
   const visibleMessages = useMemo(() => {

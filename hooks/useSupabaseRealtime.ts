@@ -18,6 +18,14 @@ interface UseSupabaseRealtimeOptions<T> {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function makeRowKey<T extends Record<string, any>>(row: T, primaryKey: keyof T) {
+  const time = row?.time;
+  const from = row?.from;
+  const to = row?.to;
+  const text = row?.text;
+  if (time !== undefined && from !== undefined && to !== undefined && text !== undefined) {
+    return `${time}|${from}|${to}|${text}`;
+  }
+
   const primaryValue = row?.[primaryKey];
   if (primaryValue !== undefined && primaryValue !== null) return String(primaryValue);
   return JSON.stringify(row);
