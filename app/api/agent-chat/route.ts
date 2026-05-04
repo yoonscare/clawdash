@@ -19,6 +19,7 @@ export async function GET() {
     if (error) throw error;
 
     const messages = (data || []).reverse().map((row) => ({
+      id: row.id,
       time: row.time,
       from: row.from_agent,
       to: row.to_agent,

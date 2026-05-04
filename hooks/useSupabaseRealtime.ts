@@ -17,6 +17,12 @@ interface UseSupabaseRealtimeOptions<T> {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
+function makeRowKey<T extends Record<string, any>>(row: T, primaryKey: keyof T) {
+  const primaryValue = row?.[primaryKey];
+  if (primaryValue !== undefined && primaryValue !== null) return String(primaryValue);
+  return JSON.stringify(row);
+}
+
 export function useSupabaseRealtime<T extends Record<string, any>>({
   table,
   fetchUrl,
@@ -55,7 +61,13 @@ export function useSupabaseRealtime<T extends Record<string, any>>({
 
           if (eventType === 'INSERT') {
             const newRow = payload.new as T;
-            setData((prev) => [...prev, newRow]);
+            setData((prev) => {
+              const newKey = makeRowKey(newRow, primaryKey);
+              if (prev.some((row) => makeRowKey(row, primaryKey) === newKey)) {
+                return prev;
+              }
+              return [...prev, newRow];
+            });
           } else if (eventType === 'UPDATE') {
             const updated = payload.new as T;
             setData((prev) =>
