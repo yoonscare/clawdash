@@ -162,17 +162,26 @@ async function syncAgent(agent, state) {
   return pushed;
 }
 
+const state = loadState();
+let isSyncing = false;
+
 async function loop() {
-  const state = loadState();
-  let total = 0;
+  if (isSyncing) return;
+  isSyncing = true;
 
-  for (const agent of AGENTS) {
-    total += await syncAgent(agent, state);
-  }
+  try {
+    let total = 0;
 
-  saveState(state);
-  if (total > 0) {
-    console.log(`[live-agent-bridge] pushed ${total} message(s) at ${new Date().toLocaleTimeString('ko-KR', { timeZone: 'Asia/Seoul' })}`);
+    for (const agent of AGENTS) {
+      total += await syncAgent(agent, state);
+    }
+
+    saveState(state);
+    if (total > 0) {
+      console.log(`[live-agent-bridge] pushed ${total} message(s) at ${new Date().toLocaleTimeString('ko-KR', { timeZone: 'Asia/Seoul' })}`);
+    }
+  } finally {
+    isSyncing = false;
   }
 }
 

@@ -38,13 +38,16 @@ export function useSupabaseRealtime<T extends Record<string, any>>({
     try {
       const res = await fetch(fetchUrl);
       const json = await res.json();
-      setData(json);
+      setData(Array.isArray(json) ? json.filter((row, index, arr) => {
+        const rowKey = makeRowKey(row, primaryKey);
+        return arr.findIndex((candidate) => makeRowKey(candidate, primaryKey) === rowKey) === index;
+      }) : []);
     } catch {
       setData([]);
     } finally {
       setLoading(false);
     }
-  }, [fetchUrl]);
+  }, [fetchUrl, primaryKey]);
 
   useEffect(() => {
     fetchData();

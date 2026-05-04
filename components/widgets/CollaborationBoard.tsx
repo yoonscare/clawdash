@@ -112,12 +112,24 @@ export default function CollaborationBoard() {
     return () => clearInterval(interval);
   }, [fetchAgents]);
 
-  const visibleMessages = useMemo(() => {
-    if (selectedSpeaker === 'all') return messages;
-    return messages.filter((message) => toAgentId(message.from) === selectedSpeaker || toAgentId(message.to) === selectedSpeaker);
-  }, [messages, selectedSpeaker]);
+  const normalizedMessages = useMemo(() => {
+    const seen = new Set<string>();
+    return [...messages]
+      .filter((message) => {
+        const key = message.id ? String(message.id) : `${message.time}|${message.from}|${message.to}|${message.text}`;
+        if (seen.has(key)) return false;
+        seen.add(key);
+        return true;
+      })
+      .sort((a, b) => (b.id ?? 0) - (a.id ?? 0));
+  }, [messages]);
 
-  const lastMessage = messages[messages.length - 1];
+  const visibleMessages = useMemo(() => {
+    if (selectedSpeaker === 'all') return normalizedMessages;
+    return normalizedMessages.filter((message) => toAgentId(message.from) === selectedSpeaker || toAgentId(message.to) === selectedSpeaker);
+  }, [normalizedMessages, selectedSpeaker]);
+
+  const lastMessage = normalizedMessages[0];
   const activeAgents = agents.filter((agent) => agent.status !== 'offline').length;
 
   return (
@@ -131,7 +143,7 @@ export default function CollaborationBoard() {
 
           <div className="grid gap-3 sm:grid-cols-3 xl:min-w-[420px]">
             {[
-              { label: '대화 수', value: `${messages.length}` },
+              { label: '대화 수', value: `${normalizedMessages.length}` },
               { label: '활성 에이전트', value: `${activeAgents}` },
               { label: '상태', value: loading ? '연결 중' : '수신 중' },
             ].map((item) => (
@@ -202,7 +214,7 @@ export default function CollaborationBoard() {
               const fromId = toAgentId(message.from);
               const meta = PERSON_META[fromId];
               return (
-                <article key={`${message.time}-${message.from}-${index}`} className="rounded-[28px] border border-white/70 bg-white/90 p-4 shadow-[0_12px_34px_rgba(15,23,42,0.06)] backdrop-blur dark:border-white/10 dark:bg-white/[0.04]">
+                <article key={message.id ?? `${message.time}-${message.from}-${message.to}-${index}`} className="rounded-[28px] border border-white/70 bg-white/90 p-4 shadow-[0_12px_34px_rgba(15,23,42,0.06)] backdrop-blur dark:border-white/10 dark:bg-white/[0.04]">
                   <div className="mb-3 flex items-center justify-between gap-3">
                     <div className="flex items-center gap-3">
                       <div className={`rounded-full bg-gradient-to-br p-[1px] ${meta.accent}`}>
